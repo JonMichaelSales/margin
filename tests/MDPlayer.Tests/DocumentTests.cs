@@ -103,7 +103,7 @@ public sealed class DocumentTests : IDisposable
         var result = new MarkdownParser().Parse(text, 42);
         Assert.Equal(42, result.Revision);
         Assert.Single(result.Outline);
-        Assert.Contains(result.Blocks, b => b.Kind == DocumentBlockKind.TableRow);
+        Assert.Contains(result.Blocks, b => b.Kind == DocumentBlockKind.Table);
         Assert.Contains("☑", result.PlainText);
         Assert.Contains("<script>", result.PlainText);
         Assert.All(result.Blocks, b => Assert.Equal(b.Text, result.PlainText.Substring(b.TextStart, b.Text.Length)));

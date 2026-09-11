@@ -1,14 +1,16 @@
 # Margin verification record
 
-Recorded 7 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
+Recorded through 11 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
 
 ## Current build checks
 
-`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **40 passed tests**, and a successful fixed-color audit. Six migration cases verify that previously saved MDPlayer skin selections become their corresponding Margin selections without rewriting the settings file or changing reading/window preferences.
+`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **48 passed tests**, and a successful fixed-color audit. Six migration cases verify that previously saved MDPlayer skin selections become their corresponding Margin selections without rewriting the settings file or changing reading/window preferences.
 
 Test output: `tests/MDPlayer.Tests/TestResults/MDPlayer.trx` (generated locally, excluded from Git). Tests exercise the real Avalonia/Skia compositor in a headless platform, including scrolling and font changes that previously exposed a render invalidation crash. That crash was fixed by deferring measure invalidation out of the render callback.
 
 Coverage includes six encoding/BOM variants, mixed newlines, external modification and deletion, injected replacement failure, Save as encoding retention, saving an older revision, corrupt/settings round trips, all 18 palettes, Read/Edit/Split editor preservation, document-wide selection, emoji/combining navigation, persistent accessibility peers, large-block chunking, staged indexing, and failed-preview resource rollback.
+
+Renderer milestone coverage now includes native semantic table cells, rich inline/link/image table content, table-cell automation peers, exact rendered-text/source mapping through Markdown delimiters and 8K grapheme-safe chunks, source-based navigation in both Split directions, keyboard link traversal, and pre-decode PNG/JPEG/GIF/BMP/WebP dimension limits. A headless Skia frame exercises the table drawing path. A native Windows development build opened the canonical design after these changes; native screen-reader and IME behavior remain separate qualification work.
 
 Palette contrast tests cover primary/secondary/link colors of the six Margin skins. They do not establish complete rendered contrast for every supplied palette or control state.
 
@@ -51,4 +53,4 @@ No packaged p95 launch/open/frame/typing/reflow or memory target has passed qual
 
 ## Outstanding acceptance
 
-See [implementation-status.md](implementation-status.md) for the remaining renderer, accessibility, mapping, image, contrast, platform and performance work. The source and Windows test packages are preliminary; the complete accepted implementation plan is not yet finished.
+See [implementation-status.md](implementation-status.md) for the remaining native accessibility, image stress, contrast, platform and performance qualification. The source and Windows test packages are preliminary; the complete accepted implementation plan is not yet finished.

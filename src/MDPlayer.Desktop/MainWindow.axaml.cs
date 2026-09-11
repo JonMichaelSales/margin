@@ -60,7 +60,7 @@ public partial class MainWindow : Window
         C<ListBox>("OutlineList").ItemTemplate = new FuncDataTemplate<OutlineEntry>((item, _) => new TextBlock { Text = item?.Title, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(Math.Max(0, (item?.Level ?? 1) - 1) * 8, 5, 0, 5), FontSize = 12 });
         C<ListBox>("OutlineList").SelectionChanged += (_, _) => { if (C<ListBox>("OutlineList").SelectedItem is OutlineEntry entry) _reader.GoToSource(entry.SourceStart); };
         _reader.ScrollRequested += offset => { var scroll = C<ScrollViewer>("DocumentScroll"); scroll.Offset = new Vector(0, Math.Max(0, offset)); };
-        _reader.SourcePositionChanged += position => SyncEditor(position);
+        _reader.SourcePositionChanged += position => SyncEditor(position, moveCaret: true);
         _reader.IndexingPending += () => SetStatus("Indexing the full document · Select all will be ready shortly");
                 _reader.LinkInvoked += OpenLink;
         _reader.RemoteImageRequested += async target =>
@@ -326,10 +326,18 @@ public partial class MainWindow : Window
         }
         _editor.Focus();
     }
-    private void SyncEditor(int source)
+    private void SyncEditor(int source, bool moveCaret = false)
     {
         if (_editor is null || _syncing) return;
-        _syncing = true; try { var line = _editor.Document.GetLineByOffset(Math.Clamp(source, 0, _editor.Document.TextLength)); _editor.ScrollToLine(line.LineNumber); } finally { _syncing = false; }
+        _syncing = true;
+        try
+        {
+            var offset = Math.Clamp(source, 0, _editor.Document.TextLength);
+            var line = _editor.Document.GetLineByOffset(offset);
+            if (moveCaret) _editor.CaretOffset = offset;
+            _editor.ScrollToLine(line.LineNumber);
+        }
+        finally { _syncing = false; }
     }
     private void AppearanceChanged(object? sender, EventArgs e) { _reader.RefreshColors(); UpdateEditorColors(); }
     private void UpdateEditorColors()

@@ -40,26 +40,35 @@ public sealed class DocumentImageCache : IDisposable
             try
             {
                 byte[] bytes;
-                if (Uri.TryCreate(target, UriKind.Absolute, out var uri) && uri.Scheme is "http" or "https")
+                var remoteUri = target.StartsWith("//", StringComparison.Ordinal) ? new Uri("https:" + target) :
+                    Uri.TryCreate(target, UriKind.Absolute, out var absolute) && absolute.Scheme is "http" or "https" ? absolute : null;
+                if (remoteUri is not null)
                 {
-                    using var response = await Http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, token);
+                    using var response = await Http.GetAsync(remoteUri, HttpCompletionOption.ResponseHeadersRead, token);
                     response.EnsureSuccessStatusCode();
-                    if (response.Content.Headers.ContentLength > 16 * 1024 * 1024) throw new IOException("Image exceeds the 16 MB limit.");
+                    if (response.Content.Headers.ContentLength > ImageSafety.MaximumEncodedBytes) throw new IOException("Image exceeds the 16 MB encoded-size limit.");
                     await using var stream = await response.Content.ReadAsStreamAsync(token);
                     bytes = await ReadBoundedAsync(stream, token);
                 }
                 else
                 {
                     if (DocumentPath is null) throw new IOException("Save the document before using relative images.");
-                    if (uri is not null && !uri.IsFile) throw new IOException("This image format or URI is unsupported.");
-                    var path = uri?.IsFile == true ? uri.LocalPath : Path.GetFullPath(Path.Combine(Path.GetDirectoryName(DocumentPath)!, Uri.UnescapeDataString(target)));
+                    var uri = Uri.TryCreate(target, UriKind.Absolute, out var localUri) ? localUri : null;
+                    if (uri is not null && !uri.IsFile && !uri.IsUnc) throw new IOException("This image format or URI is unsupported.");
+                    var path = uri?.IsFile == true || uri?.IsUnc == true ? uri.LocalPath : Path.GetFullPath(Path.Combine(Path.GetDirectoryName(DocumentPath)!, Uri.UnescapeDataString(target)));
                     await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536, true);
                     bytes = await ReadBoundedAsync(stream, token);
                 }
+                ImageSafety.Validate(bytes);
                 image = await Task.Run(() =>
                 {
                     using var stream = new MemoryStream(bytes);
-                    return Bitmap.DecodeToWidth(stream, 1200);
+                    var decoded = Bitmap.DecodeToWidth(stream, 1200);
+                    if (decoded.PixelSize.Width > ImageSafety.MaximumDimension || decoded.PixelSize.Height > ImageSafety.MaximumDimension)
+                    {
+                        decoded.Dispose(); throw new IOException("Decoded image exceeds the safe dimension limit.");
+                    }
+                    return decoded;
                 }, token);
             }
             finally { _decodeSlots.Release(); }
@@ -82,7 +91,7 @@ public sealed class DocumentImageCache : IDisposable
         {
             var read = await stream.ReadAsync(buffer, token);
             if (read == 0) break;
-            if (result.Length + read > 16 * 1024 * 1024) throw new IOException("Image exceeds the 16 MB limit.");
+            if (result.Length + read > ImageSafety.MaximumEncodedBytes) throw new IOException("Image exceeds the 16 MB encoded-size limit.");
             result.Write(buffer, 0, read);
         }
         return result.ToArray();
