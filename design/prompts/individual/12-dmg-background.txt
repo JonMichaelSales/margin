@@ -1,0 +1,12 @@
+Optional Mac DMG installation background
+Composition: 3:2
+Uses: Mac DMG window
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create a minimal background plate for a macOS application installation disk image. Flat warm off-white background with a quiet muted periwinkle vertical margin accent close to the far left edge. Reserve an empty top area for a separately typeset title. In the middle, reserve two spacious empty areas at equal height, left and right, for real application and Applications-folder icons to be overlaid later. Between the two areas, draw one small clear periwinkle arrow pointing from left to right. Leave an empty lower area for a short installation instruction. No actual app icon, folder icon, logo, words, window frame, cursor, screenshot, photo, gradient, or texture.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Optional layout concept. Finder items must be real interactive items. Add the instruction as separate typeset content: “Drag Margin to Applications.”

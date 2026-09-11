@@ -1,0 +1,12 @@
+Stacked welcome/About brand composition
+Composition: 1:1
+Uses: Welcome screen; About dialog
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create a spacious centered vertical brand composition for Margin. At the top place one modest periwinkle page-and-margin symbol; below it place the exact word "Margin" in restrained contemporary editorial serif lettering. Symbol description: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Keep both elements in the upper two thirds of the canvas and leave a clearly empty lower area for a tagline to be typeset later. Use a flat warm off-white background. Quiet proportions, ample clear space, no enclosing tile. No buttons, UI mockup, scenery, extra lettering, or tagline rendered into the image.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Typeset the exact tagline "A little room to read." separately in Avalonia. This is a composition reference, not a new decorative welcome illustration.

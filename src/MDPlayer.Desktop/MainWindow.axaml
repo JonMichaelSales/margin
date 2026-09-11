@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:icons="clr-namespace:MDPlayer.Desktop.Controls" xmlns:render="clr-namespace:MDPlayer.Rendering;assembly=MDPlayer.Rendering" x:Class="MDPlayer.Desktop.MainWindow" Title="Margin" Width="1280" Height="860" MinWidth="720" MinHeight="480">
+  <Grid RowDefinitions="Auto,Auto,*,Auto">
+    <Border Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="16,10">
+      <WrapPanel Orientation="Horizontal">
+        <icons:AppIcon Kind="brand" Width="26" Height="32" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,12,0" VerticalAlignment="Center" />
+
+        <StackPanel Margin="0,0,20,0" MinWidth="150" MaxWidth="280" VerticalAlignment="Center"><TextBlock Name="FileNameLabel" Text="Margin" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal"><icons:AppIcon Name="DirtyIcon" Kind="unsaved" Width="12" Height="14" IsVisible="False" Foreground="{DynamicResource AccentBlueBrush}" /><TextBlock Name="FileStateLabel" Text="A little room to read." Classes="secondary" FontSize="11" /></StackPanel></StackPanel>
+        <Button Name="OpenButton" Content="Open" Margin="0,0,12,0" />
+        <Button Name="ReadButton" Content="Read" Classes="active" Margin="0,0,4,0" />
+        <Button Name="EditButton" Content="Edit" Margin="0,0,4,0" />
+        <Button Name="SplitButton" Content="Split" Margin="0,0,12,0" />
+        <Button Name="OutlineButton" Content="Outline" Margin="0,0,4,0" />
+        <Button Name="TypeButton" Content="Aa · Type" Margin="0,0,4,0" />
+        <Button Name="FindButton" Content="Find" Margin="0,0,4,0" />
+        <Button Name="FocusButton" Content="Focus" Margin="0,0,4,0" />
+        <Button Name="AppearanceButton" Content="Appearance" Margin="0,0,4,0" />
+        <Button Name="SaveButton" Content="Save" Classes="accent" IsVisible="False" Margin="0,0,4,0" />
+        <Button Name="SaveAsButton" Content="Save as" IsVisible="False" />
+      </WrapPanel>
+    </Border>
+    <StackPanel Grid.Row="1">
+      <Border Name="Banner" Background="{DynamicResource SecondaryColorBrush}" Padding="16,8" IsVisible="False"><DockPanel><Button Name="DismissBanner" DockPanel.Dock="Right" Content="Dismiss" /><Button Name="ReloadButton" DockPanel.Dock="Right" Content="Reload" IsVisible="False" Margin="8,0" /><icons:AppIcon Name="BannerIcon" Kind="information" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,10,0" VerticalAlignment="Center" /><TextBlock Name="BannerText" TextWrapping="Wrap" VerticalAlignment="Center" /></DockPanel></Border>
+      <Border Name="FindBar" Background="{DynamicResource BackgroundLightBrush}" Padding="16,8" IsVisible="False"><DockPanel><Button Name="CloseFindButton" DockPanel.Dock="Right" Content="Close find" /><Button Name="NextFindButton" DockPanel.Dock="Right" Content="Next" Margin="8,0" /><Button Name="PreviousFindButton" DockPanel.Dock="Right" Content="Previous" Margin="8,0" /><TextBox Name="FindText" Watermark="Find in this document" MaxWidth="500" HorizontalAlignment="Left" MinWidth="220" /></DockPanel></Border>
+    </StackPanel>
+    <Grid Grid.Row="2" Name="DocumentGrid" ColumnDefinitions="208,*,0" IsVisible="False">
+      <Border Name="OutlinePanel" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0" Padding="16,24"><DockPanel><TextBlock Text="ON THIS PAGE" FontSize="11" LetterSpacing="1" Classes="secondary" DockPanel.Dock="Top" Margin="0,0,0,16" /><ListBox Name="OutlineList" /></DockPanel></Border>
+      <Grid Name="Workspace" Grid.Column="1" ColumnDefinitions="*,0,0">
+        <ScrollViewer Name="DocumentScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><render:MarkdownDocumentView Name="Reader" HorizontalAlignment="Center" /></ScrollViewer>
+        <GridSplitter Name="PaneSplitter" Grid.Column="1" Width="5" Background="{DynamicResource BorderBrush}" IsVisible="False" />
+        <DockPanel Name="EditorHost" Grid.Column="2" IsVisible="False" Margin="16">
+          <WrapPanel DockPanel.Dock="Top" Name="EditToolbar" Margin="0,0,0,12">
+            <Button Name="UndoButton" Content="Undo" Margin="0,0,4,4" /><Button Name="RedoButton" Content="Redo" Margin="0,0,12,4" />
+            <Button Name="HeadingButton" Content="Heading" Margin="0,0,4,4" /><Button Name="BoldButton" Content="Bold" Margin="0,0,4,4" /><Button Name="ItalicButton" Content="Italic" Margin="0,0,4,4" /><Button Name="QuoteButton" Content="Quote" Margin="0,0,4,4" /><Button Name="ListButton" Content="List" Margin="0,0,4,4" /><Button Name="CodeButton" Content="Code" Margin="0,0,4,4" /><Button Name="LinkButton" Content="Link" Margin="0,0,4,4" />
+          </WrapPanel>
+        </DockPanel>
+      </Grid>
+      <Border Name="TypePanel" Grid.Column="2" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0" Padding="20" IsVisible="False">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"><StackPanel Spacing="8">
+          <TextBlock Text="Make it yours" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Reading appearance only" Classes="secondary" FontSize="12" Margin="0,0,0,12" />
+          <TextBlock Text="Typeface" /><TextBox Name="FontFamilyBox" Text="Georgia" Watermark="Installed font name" />
+          <TextBlock Name="FontSizeLabel" Text="Font size · 18" /><Slider Name="FontSizeSlider" Minimum="12" Maximum="32" TickFrequency="1" IsSnapToTickEnabled="True" Value="18" />
+          <TextBlock Name="LineHeightLabel" Text="Line height · 1.65" /><Slider Name="LineHeightSlider" Minimum="1.2" Maximum="2.2" TickFrequency="0.05" IsSnapToTickEnabled="True" Value="1.65" />
+          <TextBlock Name="ParagraphGapLabel" Text="Paragraph gap · 0.8 em" /><Slider Name="ParagraphGapSlider" Minimum="0" Maximum="1.8" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="0.8" />
+          <TextBlock Name="ReadingWidthLabel" Text="Reading width · 68 characters" /><Slider Name="ReadingWidthSlider" Minimum="48" Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Value="68" />
+          <TextBlock Text="Alignment" /><ComboBox Name="AlignmentBox" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Natural" /><ComboBoxItem Content="Justified" /></ComboBox>
+          <TextBlock Name="IndentLabel" Text="First-line indent · 0 em" /><Slider Name="IndentSlider" Minimum="0" Maximum="2" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="0" />
+          <Button Name="UseDefaultsButton" Content="Use as default" Margin="0,16,0,0" /><Button Name="CloseTypeButton" Content="Close typography" />
+        </StackPanel></ScrollViewer>
+      </Border>
+    </Grid>
+    <ScrollViewer Grid.Row="2" Name="EmptyPanel" HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"><StackPanel HorizontalAlignment="Center" Spacing="18" Margin="24">
+      <icons:AppIcon Kind="brand" Width="70" Height="84" Foreground="{DynamicResource AccentBlueBrush}" HorizontalAlignment="Center" /><TextBlock Text="Margin" FontFamily="Georgia" FontSize="56" FontWeight="SemiBold" Foreground="{DynamicResource AccentBlueBrush}" HorizontalAlignment="Center" />
+      <TextBlock Text="A little room to read." FontFamily="Georgia" FontSize="34" HorizontalAlignment="Center" />
+      <TextBlock Text="Open a Markdown file and make yourself comfortable." Classes="secondary" HorizontalAlignment="Center" />
+      <Button Name="EmptyOpenButton" Content="Open a Markdown file" Classes="accent" HorizontalAlignment="Center" />
+      <TextBlock Text="or drop a .md or .markdown file here" Classes="secondary" FontSize="12" HorizontalAlignment="Center" />
+    </StackPanel></ScrollViewer>
+    <Border Grid.Row="3" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0" Padding="16,8"><DockPanel><TextBlock Name="DetailsLabel" DockPanel.Dock="Right" Classes="secondary" FontSize="12" /><Button Name="CancelLoadButton" DockPanel.Dock="Right" Content="Cancel loading" IsVisible="False" /><Button Name="AboutButton" DockPanel.Dock="Right" Content="About" Padding="6,0" MinHeight="22" Margin="8,0,0,0" /><icons:AppIcon Name="StatusIcon" Kind="success" Width="14" Height="16" Foreground="{DynamicResource SuccessBrush}" IsVisible="False" Margin="0,0,6,0" /><TextBlock Name="StatusLabel" Text="Ready when you are" Classes="secondary" FontSize="12" VerticalAlignment="Center" /></DockPanel></Border>
+  </Grid>
+</Window>

@@ -1,0 +1,12 @@
+Brand symbol — page and margin concept
+Composition: 1:1
+Uses: Toolbar; Brand identity exploration
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Design one standalone brand symbol. A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Render the entire mark in solid black on a plain white background, with approximately 20 percent clear space around it. It must remain distinguishable at a very small toolbar size. No tile, lettering, wordmark, caption, UI, or surrounding scene. Deliver one large isolated symbol.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Working direction, not a final approved logo. Use a monochrome symbol so it can later take its color from SkinManager.

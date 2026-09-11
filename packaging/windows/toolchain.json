@@ -1,0 +1,6 @@
+{
+  "compiler": "Inno Setup 6 (installed compiler pinned by SHA-256)",
+  "isccSha256": "8A430B74FD1ECEF5651F514A62B5341B0C65E1A53FFE5BA33CC26CF57E67029F",
+  "source": "https://jrsoftware.org/isdl.php",
+  "sdk": "10.0.303"
+}

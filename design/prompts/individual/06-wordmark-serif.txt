@@ -1,0 +1,12 @@
+Wordmark — editorial serif exploration
+Composition: 3:1
+Uses: Welcome screen; About dialog; Installer brand composition
+
+POSITIVE PROMPT
+Design a refined typographic wordmark containing exactly the single word "Margin", capital M followed by lowercase argin. Calm contemporary editorial serif lettering, moderate stroke contrast, open counters, sturdy small details, thoughtful optical spacing, approachable rather than ornate. Muted periwinkle lettering on a flat warm off-white background. Center the complete word with generous clear space on all sides. Straight-on flat graphic. No symbol, tagline, border, book illustration, mockup, extra letters, or additional text.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Exploration only. Final wordmark should be rebuilt using a chosen licensed typeface or custom lettering; generated lettering is not a font specification.

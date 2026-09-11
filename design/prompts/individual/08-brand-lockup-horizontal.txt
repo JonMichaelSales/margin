@@ -1,0 +1,12 @@
+Horizontal brand composition
+Composition: 4:1
+Uses: Installer header branding; About branding
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create a single horizontal brand composition. Place a compact muted periwinkle page-and-margin symbol on the left and the exact word "Margin" on the right in restrained contemporary editorial serif lettering. Symbol description: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Align their optical centers, leave a comfortable gap, and maintain generous outer clear space. Use a flat warm off-white background. Show the complete composition straight on. No tagline, other text, border, software controls, mockup, or illustration.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Layout exploration. In the final application, compose the approved symbol and wordmark assets instead of generating new variants.

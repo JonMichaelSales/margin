@@ -1,0 +1,141 @@
+{
+  "product": "Margin",
+  "pass": "2026-09-08-pass-01",
+  "generator": "built-in image_gen",
+  "purpose": "First-pass concepts; current application assets unchanged",
+  "expected": 44,
+  "records": [
+    {
+      "id": "01-symbol-page-margin",
+      "source_path": "C:/Users/jonms/.codex/generated_images/01a077dc-7b13-7692-89bc-e3631f6eae2d/exec-9601c687-ca37-4c86-9a29-25d10ce18060.png",
+      "file": "01-symbol-page-margin.png",
+      "prompt": "Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Design one standalone brand symbol. A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Render the entire mark in solid black on a plain white background, with approximately 20 percent clear space around it. It must remain distinguishable at a very small toolbar size. No tile, lettering, wordmark, caption, UI, or surrounding scene. Deliver one large isolated symbol.",
+      "review": "Generated transparent monochrome page symbol; retains an open corner."
+    },
+    {
+      "id": "02-symbol-monogram",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-2b6bef0e-d337-4b6e-ab6e-215be48ac319.png",
+      "file": "02-symbol-monogram.png",
+      "prompt": "Use case: logo-brand\nAsset: Alternate brand symbol — M monogram. Compose at 1:1 aspect ratio.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Design one original capital M monogram for Margin. Construct the M from two or three broad geometric strokes, incorporating a quiet vertical reading margin through negative space. Keep the letter immediately recognizable without a surrounding page, book, or download arrow. Render the whole mark in solid black on plain white, with approximately 20 percent clear space. Favor a memorable silhouette and optical balance at very small sizes. No tile, additional words, captions, UI, or surrounding scene. Deliver one isolated symbol.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "03-symbol-reading-marker",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-cd9ffcf6-1807-4255-9cf9-03cf6340a683.png",
+      "file": "03-symbol-reading-marker.png",
+      "prompt": "Use case: logo-brand\nAsset: Alternate brand symbol — reading marker. Compose at 1:1 aspect ratio.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Design one original reading-marker symbol for Margin. Combine a simple bookmark shape and a restrained page-edge gesture into a single compact silhouette. Evoke a place kept in a book and the quiet space beside a paragraph. Use only a few broad shapes and one deliberate negative-space opening. Solid black mark on plain white, approximately 20 percent clear space. Keep it legible at very small sizes. No letters, words, hearts, stars, download arrows, tile, UI, or surrounding scene. Deliver one isolated symbol.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "04-windows-app-icon",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-419459de-2ca3-4ac0-b8eb-112bf5fb26f9.png",
+      "file": "04-windows-app-icon-revised.png",
+      "prompt": "Use case: precise-object-edit. Correct this Margin application icon. Preserve the white page-and-margin symbol geometry, its position, the rounded square outer boundary and overall composition. Replace ALL of the teal tile interior with a completely opaque, perfectly uniform solid teal fill #176B60. The center and every space between white strokes must be solid teal with alpha 255: no holes, transparency, mottling, gradients, lighting, texture or shadows inside the rounded square. Preserve the warm off-white symbol. Transparency is allowed ONLY outside the rounded square. Do not add or remove shapes. Final square app icon, crisp flat graphic.",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/04-windows-app-icon.png"
+      ],
+      "previous_attempts": [
+        {
+          "id": "04-windows-app-icon",
+          "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-6f938775-7038-4b6e-8dfc-8e3a4571700a.png",
+          "file": "04-windows-app-icon.png",
+          "prompt": "Use case: logo-brand\nAsset: Primary app icon — Windows composition. Compose at 1:1 aspect ratio.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create one desktop application icon for Margin. Use a deep muted teal rounded-square tile, with a warm off-white brand symbol centered inside it. The symbol is: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. The central symbol should occupy roughly two thirds of the tile height. Keep the overall silhouette bold, the interior uncluttered, and the margin line strong enough to survive reduction to a small taskbar icon. Place the entire tile within the canvas with a narrow plain-white surround; do not crop its corners. No app name, tagline, readable document text, device mockup, or surrounding UI.\nReference image 1 is the brand symbol: preserve its geometry and open-corner detail exactly; recolor it warm off-white for the tile.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+          "reference_paths": [
+            "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/01-symbol-page-margin.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-macos-app-icon",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-59c2c837-1a3d-45b2-a0c0-4549182787b1.png",
+      "file": "05-macos-app-icon.png",
+      "prompt": "Use case: logo-brand\nAsset: App icon — macOS composition. Target composition aspect ratio 1:1.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create one macOS desktop application icon for Margin using a softly rounded-square deep muted teal tile and a centered warm off-white symbol. The symbol is: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Use the same restrained identity and bold proportions as a clean Windows version, with balanced inset spacing and a carefully resolved rounded-square silhouette suitable for a Dock icon. Flat colors, crisp geometry, no material effects. Show only the complete icon on a plain white surround, centered and uncropped. No words, screen, Dock mockup, wallpaper, or other application icons.\nReference 1 is the Windows app icon. Preserve that exact page-and-margin symbol and its proportions. Make the teal tile fully opaque and flat; put transparency only outside the tile. Do not paint a black surround.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/04-windows-app-icon-revised.png"
+      ]
+    },
+    {
+      "id": "06-wordmark-serif",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-d9779eef-16ed-464d-ba8d-5e54a66a4258.png",
+      "file": "06-wordmark-serif.png",
+      "prompt": "Use case: logo-brand\nAsset: Wordmark — editorial serif exploration. Compose at 3:1 aspect ratio.\nDesign a refined typographic wordmark containing exactly the single word \"Margin\", capital M followed by lowercase argin. Calm contemporary editorial serif lettering, moderate stroke contrast, open counters, sturdy small details, thoughtful optical spacing, approachable rather than ornate. Deep muted teal lettering on a flat warm off-white background. Center the complete word with generous clear space on all sides. Straight-on flat graphic. No symbol, tagline, border, book illustration, mockup, extra letters, or additional text.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "07-wordmark-sans",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-48ed4247-5639-4af2-b7c2-6be48d07a7b5.png",
+      "file": "07-wordmark-sans.png",
+      "prompt": "Use case: logo-brand\nAsset: Wordmark — humanist sans-serif exploration. Compose at 3:1 aspect ratio.\nDesign a refined typographic wordmark containing exactly the single word \"Margin\", capital M followed by lowercase argin. Warm humanist sans-serif lettering with open counters, a clear distinctive lowercase g, restrained medium weight, balanced optical spacing, and friendly precision. Deep muted teal lettering on a flat warm off-white background. Center the whole word with generous clear space. Straight-on flat graphic. No symbol, tagline, border, book illustration, mockup, extra letters, or additional text.\n\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "08-brand-lockup-horizontal",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-23841fa8-d077-4c0e-9ab4-7afe0aa98bd1.png",
+      "file": "08-brand-lockup-horizontal.png",
+      "prompt": "Use case: logo-brand\nAsset: Horizontal brand composition. Target composition aspect ratio 4:1.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create a single horizontal brand composition. Place a compact deep muted teal page-and-margin symbol on the left and the exact word \"Margin\" on the right in restrained contemporary editorial serif lettering. Symbol description: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Align their optical centers, leave a comfortable gap, and maintain generous outer clear space. Use a flat warm off-white background. Show the complete composition straight on. No tagline, other text, border, software controls, mockup, or illustration.\nReference 1 defines the symbol geometry; reference 2 defines the exact wordmark lettering. Preserve both identities while arranging them as requested. Use clean flat teal shapes and accurate text spelling: Margin.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/01-symbol-page-margin.png",
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/06-wordmark-serif.png"
+      ]
+    },
+    {
+      "id": "09-brand-lockup-stacked",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-73731e24-5fb1-4b38-b1ae-044e88b6fe7e.png",
+      "file": "09-brand-lockup-stacked.png",
+      "prompt": "Use case: logo-brand\nAsset: Stacked welcome/About brand composition. Target composition aspect ratio 1:1.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create a spacious centered vertical brand composition for Margin. At the top place one modest teal page-and-margin symbol; below it place the exact word \"Margin\" in restrained contemporary editorial serif lettering. Symbol description: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Keep both elements in the upper two thirds of the canvas and leave a clearly empty lower area for a tagline to be typeset later. Use a flat warm off-white background. Quiet proportions, ample clear space, no enclosing tile. No buttons, UI mockup, scenery, extra lettering, or tagline rendered into the image.\nReference 1 defines the symbol geometry; reference 2 defines the exact wordmark lettering. Preserve both identities while arranging them as requested. Use clean flat teal shapes and accurate text spelling: Margin.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/01-symbol-page-margin.png",
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/06-wordmark-serif.png"
+      ]
+    },
+    {
+      "id": "10-markdown-document-icon",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-b6573c88-8b3f-4034-8735-bf30d5245d7b.png",
+      "file": "10-markdown-document-icon.png",
+      "prompt": "Use case: logo-brand\nAsset: Associated Markdown document icon. Target composition aspect ratio 1:1.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create one operating-system file icon for a Markdown document associated with Margin. Use a tall warm off-white page silhouette with one subtle folded top-right corner, a crisp deep teal outline, and a prominent teal vertical margin line near the left edge. Include a small simple page-and-margin brand identifier near the lower portion, clearly subordinate to the document silhouette. Maintain large quiet areas, broad readable shapes, and a clean outer contour. Isolate the complete document on plain white with generous surrounding space. No rounded-square application tile, extension label, words, readable document text, download arrow, or mockup.\nReference 1 defines the small Margin identifier. Preserve its identity while placing it inside the document icon as requested.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/01-symbol-page-margin.png"
+      ]
+    },
+    {
+      "id": "11-installer-header-background",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-db226b95-e17f-408d-8acd-1dcce0377c86.png",
+      "file": "11-installer-header-background.png",
+      "prompt": "Use case: logo-brand\nAsset: Optional installer header background. Target composition aspect ratio 5:1.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create a very restrained wide background plate for a desktop application's installer header. Flat warm off-white field. Place one short deep muted teal vertical accent near the far left edge, echoing a page margin, with ample breathing room. Leave almost the entire remaining width completely empty and visually even for a separately placed logo, application name, and installation heading. Flat graphic, clean edges, no gradients, texture, illustration, symbols, words, icons, buttons, screenshot, or frame.\n\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "12-dmg-background",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-325f1f1c-9723-45b1-97d0-f71077e0be03.png",
+      "file": "12-dmg-background.png",
+      "prompt": "Use case: logo-brand\nAsset: Optional Mac DMG installation background. Target composition aspect ratio 3:2.\nCalm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and deep muted teal, approximately #FCFBF7 and #176B60. Flat vector-style artwork, viewed straight on. Create a minimal background plate for a macOS application installation disk image. Flat warm off-white background with a quiet deep muted teal vertical margin accent close to the far left edge. Reserve an empty top area for a separately typeset title. In the middle, reserve two spacious empty areas at equal height, left and right, for real application and Applications-folder icons to be overlaid later. Between the two areas, draw one small clear teal arrow pointing from left to right. Leave an empty lower area for a short installation instruction. No actual app icon, folder icon, logo, words, window frame, cursor, screenshot, photo, gradient, or texture.\n\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "13-open",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-985280e6-5ca9-4b0f-a0ca-4e4101447bf6.png",
+      "file": "13-open.png",
+      "prompt": "Use case: logo-brand\nAsset: Open. Compose at 1:1 aspect ratio.\nCreate exactly one isolated desktop interface icon for Margin, a calm editorial Markdown reader. Monochrome solid-black strokes on a plain white background. Flat vector-style drawing, straight-on view, consistent medium stroke weight, gently rounded line caps and joins, simple geometry, open shapes, no tiny details. Center the complete icon inside a square canvas with roughly 20 percent clear space on every side. Design it to remain clear when reduced to 20–24 pixels. No colored tile, border, shadow, gradient, texture, mockup, surrounding interface, extra symbols, captions, or labels.\n\nSubject: An open folder with a clear upward-tilted front flap. The folder alone communicates opening a file; no arrow or letters.\n\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": []
+    },
+    {
+      "id": "14-save",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-7645beaa-3516-4640-a9be-aaee03d6607f.png",
+      "file": "14-save.png",
+      "prompt": "Use case: logo-brand\nAsset: Save. Square composition.\nCreate exactly one isolated desktop interface icon for Margin, a calm editorial Markdown reader. Monochrome solid-black strokes on a plain white background. Flat vector-style drawing, straight-on view, consistent medium stroke weight, gently rounded line caps and joins, simple geometry, open shapes, no tiny details. Center the complete icon inside a square canvas with roughly 20 percent clear space on every side. Design it to remain clear when reduced to 20–24 pixels. No colored tile, border, shadow, gradient, texture, mockup, surrounding interface, extra symbols, captions, or labels.\n\nSubject: A simple recognizable floppy-disk silhouette in outline, with one broad upper inset and one broad lower panel. No letters or tiny mechanical details.\nReference image 1 establishes only the black stroke weight, corner radius, and icon size; replace its subject entirely with the requested Save symbol. No shading or material variation.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/13-open.png"
+      ]
+    },
+    {
+      "id": "15-save-as",
+      "source_path": "C:\\Users\\jonms\\.codex\\generated_images\\01a077dc-7b13-7692-89bc-e3631f6eae2d\\exec-ffa5420d-9a1e-4f65-b854-f8526ebc92f7.png",
+      "file": "15-save-as.png",
+      "prompt": "Use case: logo-brand\nAsset: Save as. Square composition.\nCreate exactly one isolated desktop interface icon for Margin, a calm editorial Markdown reader. Monochrome solid-black strokes on a plain white background. Flat vector-style drawing, straight-on view, consistent medium stroke weight, gently rounded line caps and joins, simple geometry, open shapes, no tiny details. Center the complete icon inside a square canvas with roughly 20 percent clear space on every side. Design it to remain clear when reduced to 20–24 pixels. No colored tile, border, shadow, gradient, texture, mockup, surrounding interface, extra symbols, captions, or labels.\n\nSubject: A simple floppy-disk outline with a small pencil overlapping its lower-right corner, communicating saving under a new name. Both shapes must be readable, with no extra badge or letters.\nReference image 1 establishes only the black stroke weight, corner radius, and icon size; replace its subject entirely with the requested Save as symbol. No shading or material variation.\nAvoid: photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges",
+      "reference_paths": [
+        "D:/repos/MDPlayer/design/generated/2026-09-08-pass-01/13-open.png"
+      ]
+    }
+  ]
+}

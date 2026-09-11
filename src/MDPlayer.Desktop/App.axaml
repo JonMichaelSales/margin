@@ -1,0 +1,26 @@
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="MDPlayer.Desktop.App">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries><ResourceInclude Source="avares://AvaloniaThemeManager/Themes/ColorTheme.axaml" /><ResourceInclude Source="avares://Margin/ControlThemes.axaml" /></ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+  <Application.Styles>
+    <FluentTheme />
+    <Style Selector="Window"><Setter Property="Background" Value="{DynamicResource BackgroundBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="FontFamily" Value="avares://Avalonia.Fonts.Inter/Assets#Inter" /><Setter Property="FontSize" Value="14" /></Style>
+    <Style Selector="TextBlock.secondary"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /></Style>
+    <Style Selector="TextBox"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /><Setter Property="SelectionBrush" Value="{DynamicResource SecondaryColorBrush}" /><Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="CaretBrush" Value="{DynamicResource AccentBlueBrush}" /></Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="{DynamicResource PrimaryColorBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" /><Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="6" /><Setter Property="Padding" Value="12,7" /><Setter Property="MinHeight" Value="34" />
+      <Setter Property="Template"><ControlTemplate><Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"><ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" /></Border></ControlTemplate></Setter>
+    </Style>
+    <Style Selector="Button:pointerover"><Setter Property="Background" Value="{DynamicResource SecondaryColorBrush}" /></Style>
+    <Style Selector="Button:pressed"><Setter Property="BorderBrush" Value="{DynamicResource AccentBlueBrush}" /></Style>
+    <Style Selector="Button:focus-visible"><Setter Property="BorderBrush" Value="{DynamicResource AccentBlueBrush}" /><Setter Property="BorderThickness" Value="2" /></Style>
+    <Style Selector="Button:disabled"><Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" /></Style>
+    <Style Selector="Button.active"><Setter Property="Background" Value="{DynamicResource SecondaryColorBrush}" /><Setter Property="Foreground" Value="{DynamicResource AccentBlueBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource AccentBlueBrush}" /></Style>
+    <Style Selector="Button.accent"><Setter Property="Background" Value="{DynamicResource AccentBlueBrush}" /><Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" /></Style>
+    <Style Selector="ToolTip"><Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Style>
+    <Style Selector="ListBox"><Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}" /><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" /><Setter Property="BorderThickness" Value="0" /></Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter"><Setter Property="Background" Value="{DynamicResource SecondaryColorBrush}" /><Setter Property="TextBlock.Foreground" Value="{DynamicResource TextPrimaryBrush}" /></Style>
+  </Application.Styles>
+</Application>

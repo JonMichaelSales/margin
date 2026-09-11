@@ -1,0 +1,14 @@
+Save as
+Composition: 1:1
+Uses: Save as controls
+
+POSITIVE PROMPT
+Create exactly one isolated desktop interface icon for Margin, a calm editorial Markdown reader. Monochrome solid-black strokes on a plain white background. Flat vector-style drawing, straight-on view, consistent medium stroke weight, gently rounded line caps and joins, simple geometry, open shapes, no tiny details. Center the complete icon inside a square canvas with roughly 20 percent clear space on every side. Design it to remain clear when reduced to 20–24 pixels. No colored tile, border, shadow, gradient, texture, mockup, surrounding interface, extra symbols, captions, or labels.
+
+Subject: A simple floppy-disk outline with a small pencil overlapping its lower-right corner, communicating saving under a new name. Both shapes must be readable, with no extra badge or letters.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Exploration/reference asset. Final UI icons should be coherent vectors or geometry bound to named SkinManager brushes, rather than individually shipped generated bitmaps.

@@ -1,0 +1,12 @@
+Alternate brand symbol — reading marker
+Composition: 1:1
+Uses: Alternative identity exploration
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Design one original reading-marker symbol for Margin. Combine a simple bookmark shape and a restrained page-edge gesture into a single compact silhouette. Evoke a place kept in a book and the quiet space beside a paragraph. Use only a few broad shapes and one deliberate negative-space opening. Solid black mark on plain white, approximately 20 percent clear space. Keep it legible at very small sizes. No letters, words, hearts, stars, download arrows, tile, UI, or surrounding scene. Deliver one isolated symbol.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Alternative to prompt 01, not an additional logo to ship.

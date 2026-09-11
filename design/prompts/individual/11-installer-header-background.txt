@@ -1,0 +1,12 @@
+Optional installer header background
+Composition: 5:1
+Uses: Windows installer header
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create a very restrained wide background plate for a desktop application's installer header. Flat warm off-white field. Place one short muted periwinkle vertical accent near the far left edge, echoing a page margin, with ample breathing room. Leave almost the entire remaining width completely empty and visually even for a separately placed logo, application name, and installation heading. Flat graphic, clean edges, no gradients, texture, illustration, symbols, words, icons, buttons, screenshot, or frame.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Optional background concept only. Installer copy, logo, and tagline are composed separately. Exact dimensions follow the chosen installer layout.

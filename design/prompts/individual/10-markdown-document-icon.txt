@@ -1,0 +1,12 @@
+Associated Markdown document icon
+Composition: 1:1
+Uses: .md files; .markdown files
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create one operating-system file icon for a Markdown document associated with Margin. Use a tall warm off-white page silhouette with one subtle folded top-right corner, a crisp deep periwinkle outline, and a prominent periwinkle vertical margin line near the left edge. Include a small simple page-and-margin brand identifier near the lower portion, clearly subordinate to the document silhouette. Maintain large quiet areas, broad readable shapes, and a clean outer contour. Isolate the complete document on plain white with generous surrounding space. No rounded-square application tile, extension label, words, readable document text, download arrow, or mockup.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+File icon must remain visibly different from the app launcher. Use the selected brand symbol as reference for the small identifier; simplify or omit tiny details in final small-size variants.

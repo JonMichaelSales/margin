@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>WinExe</OutputType><AssemblyName>Margin</AssemblyName><RootNamespace>MDPlayer.Desktop</RootNamespace><PackageId>MDPlayer.Desktop</PackageId><Title>Margin</Title><Description>A little room to read.</Description><ApplicationManifest>app.manifest</ApplicationManifest><ApplicationIcon>Assets/Margin.ico</ApplicationIcon><RuntimeIdentifiers>win-x64;win-arm64;osx-x64;osx-arm64</RuntimeIdentifiers></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="AvaloniaSkinManager" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <ProjectReference Include="../MDPlayer.Infrastructure/MDPlayer.Infrastructure.csproj" />
+    <ProjectReference Include="../MDPlayer.Rendering/MDPlayer.Rendering.csproj" />
+    <AvaloniaResource Include="Skins/*.json" />
+    <AvaloniaResource Include="Assets/*" /><None Update="Assets/Margin.Document.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+<ItemGroup><PackageReference Include="Tmds.DBus.Protocol" /></ItemGroup></Project>

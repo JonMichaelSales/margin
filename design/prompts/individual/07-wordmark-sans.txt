@@ -1,0 +1,12 @@
+Wordmark — humanist sans-serif exploration
+Composition: 3:1
+Uses: Alternative wordmark exploration
+
+POSITIVE PROMPT
+Design a refined typographic wordmark containing exactly the single word "Margin", capital M followed by lowercase argin. Warm humanist sans-serif lettering with open counters, a clear distinctive lowercase g, restrained medium weight, balanced optical spacing, and friendly precision. Muted periwinkle lettering on a flat warm off-white background. Center the whole word with generous clear space. Straight-on flat graphic. No symbol, tagline, border, book illustration, mockup, extra letters, or additional text.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Alternative to prompt 06, not a second production wordmark.

@@ -1,0 +1,12 @@
+Primary app icon — Windows composition
+Composition: 1:1
+Uses: Windows executable; Taskbar; Start Menu; Desktop shortcut; Installer executable; Add/Remove Programs
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create one desktop application icon for Margin. Use a muted periwinkle rounded-square tile, with a warm off-white brand symbol centered inside it. The symbol is: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. The central symbol should occupy roughly two thirds of the tile height. Keep the overall silhouette bold, the interior uncluttered, and the margin line strong enough to survive reduction to a small taskbar icon. Place the entire tile within the canvas with a narrow plain-white surround; do not crop its corners. No app name, tagline, readable document text, device mockup, or surrounding UI.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+Reuse one approved icon across these Windows surfaces. After selecting a symbol, use it as an image reference when the model/workflow supports references; do not accept a newly invented symbol in each export.

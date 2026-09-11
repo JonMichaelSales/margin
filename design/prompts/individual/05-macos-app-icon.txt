@@ -1,0 +1,12 @@
+App icon — macOS composition
+Composition: 1:1
+Uses: Mac application; Dock; DMG application item
+
+POSITIVE PROMPT
+Calm editorial identity for Margin, a fast desktop Markdown reader with deliberate editing. Communicate clarity, breathing room, precision, and a comfortable place to read. Simple intentional geometry, generous negative space, balanced proportions, crisp edges. Restrained warm off-white and muted periwinkle, approximately #FCFBF7 and #6674CC. Flat vector-style artwork, viewed straight on. Create one macOS desktop application icon for Margin using a softly rounded-square muted periwinkle tile and a centered warm off-white symbol. The symbol is: A single upright page silhouette with a distinctive vertical margin line slightly inset from its left edge, leaving a generous quiet reading area. A small intentional opening or offset in the page outline makes the silhouette recognizable. Reduce the idea to a few broad shapes; avoid detailed text lines, folded corners, and a download arrow. Use the same restrained identity and bold proportions as a clean Windows version, with balanced inset spacing and a carefully resolved rounded-square silhouette suitable for a Dock icon. Flat colors, crisp geometry, no material effects. Show only the complete icon on a plain white surround, centered and uncropped. No words, screen, Dock mockup, wallpaper, or other application icons.
+
+OPTIONAL NEGATIVE PROMPT
+photograph, photorealism, 3D render, perspective mockup, metallic material, glass, glow, heavy shadows, gradients, paper texture, distressed texture, watermark, signature, stock-logo presentation, contact sheet, multiple alternatives in one image, decorative border, unrelated objects, tiny details, blurry edges
+
+NOTES
+An adaptation of the same identity, not a separate Mac logo. Final platform padding and masking are export decisions.

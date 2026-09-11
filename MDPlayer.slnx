@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MDPlayer.Core/MDPlayer.Core.csproj" />
+    <Project Path="src/MDPlayer.Infrastructure/MDPlayer.Infrastructure.csproj" />
+    <Project Path="src/MDPlayer.Rendering/MDPlayer.Rendering.csproj" />
+    <Project Path="src/MDPlayer.Desktop/MDPlayer.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/"><Project Path="tests/MDPlayer.Tests/MDPlayer.Tests.csproj" /></Folder>
+  <Folder Name="/benchmarks/"><Project Path="benchmarks/MDPlayer.Benchmarks/MDPlayer.Benchmarks.csproj" /></Folder>
+</Solution>
