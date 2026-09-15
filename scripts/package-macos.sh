@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 rid="${1:-osx-arm64}"
-version="${2:-0.1.2}"
+version="${2:-0.1.4}"
 case "$rid" in osx-x64|osx-arm64) ;; *) echo "Expected osx-x64 or osx-arm64" >&2; exit 1 ;; esac
 [[ "$(uname -s)" == Darwin ]] || { echo 'DMG creation and signing require macOS.' >&2; exit 1; }
 root="$(cd "$(dirname "$0")/.." && pwd)"

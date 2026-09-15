@@ -2,7 +2,7 @@
 
 **A little room to read.**
 
-A native C# / Avalonia Markdown reader and explicit editor. Personal testing release **0.1.2**. The application is implemented and under qualification; the complete acceptance matrix is not yet passed.
+A native C# / Avalonia Markdown reader and explicit editor. Personal testing release **0.1.4**. The application is implemented and under qualification; the complete acceptance matrix is not yet passed.
 
 Files open in rendered **Read** mode. Choose **Edit** or **Split** to change the buffer, then **Save** deliberately. Appearance and reading preferences are stored separately from documents. There is no autosave, recent-file history, document recovery, or session restoration.
 

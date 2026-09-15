@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Directory, [Parameter(Mandatory)][string]$Runtime, [string]$Version = '0.1.2')
+param([Parameter(Mandatory)][string]$Directory, [Parameter(Mandatory)][string]$Runtime, [string]$Version = '0.1.4')
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $commit = git -c "safe.directory=$root" -C $root rev-parse --verify HEAD 2>$null

@@ -6,7 +6,7 @@
     <LangVersion>latest</LangVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <Version>0.1.2</Version>
+    <Version>0.1.4</Version>
     <Authors>Jon Sales</Authors>
     <Product>Margin</Product>
     <Deterministic>true</Deterministic>

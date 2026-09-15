@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][ValidateSet('win-x64','win-arm64','osx-x64','osx-arm64')][string]$Runtime, [string]$Version = '0.1.2')
+param([Parameter(Mandatory)][ValidateSet('win-x64','win-arm64','osx-x64','osx-arm64')][string]$Runtime, [string]$Version = '0.1.4')
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $destination = Join-Path $root "artifacts/publish/margin/$Runtime"
