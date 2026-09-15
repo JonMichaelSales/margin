@@ -1,6 +1,6 @@
 # Margin verification record
 
-Recorded through 14 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
+Recorded through 15 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
 
 ## Current build checks
 
@@ -23,6 +23,7 @@ Palette contrast tests cover primary/secondary/link colors of the six Margin ski
 - Margin 0.1.2 x64 and ARM64 installers built successfully. The x64 upgrade from MDPlayer 0.1.1, uninstall, and reinstall all passed. Settings and document fixture SHA-256 values and default associations were unchanged. The legacy apphost was removed; existing handler commands resolve to `Margin.exe`; installed product metadata is Margin; the Margin Start Menu shortcut points to the new executable.
 - Rename evidence is in `artifacts/qualification/margin-0.1.2-windows-lifecycle.json` and corresponding versioned installer logs. The earlier `windows-lifecycle.json` remains the MDPlayer 0.1.0 → 0.1.1 record.
 - Margin 0.1.4 x64 was published self-contained from clean commit `21bc8843878941c82bcdb922837c61f2c6812605`, packaged with Inno Setup, checksum-verified, and installed cleanly for the current user. The installed application and renderer binaries match the publish output; Add/Remove Programs reports 0.1.4; the Start Menu shortcut and quoted Markdown handler are present. The installed executable opened `design/canonical-design.md` in a responsive native window with product version `0.1.4+21bc8843878941c82bcdb922837c61f2c6812605`.
+- The final 0.1.4 x64 installer was regenerated from clean, pushed commit `a5a82ffcfcd31dca93c7c69f955ec0e20940858f` and reinstalled after a temporary D: volume disconnect cleared. Installer SHA-256: `b2f8bd83f510ee66136a9737bd129deba6bae7b57a2a82ecbdd5c1e1378e02fe`. The installed launcher, application assembly, renderer assembly, and metadata exactly match the publish output; the installed application opened the canonical Markdown design and reports `0.1.4+a5a82ffcfcd31dca93c7c69f955ec0e20940858f`.
 - Margin 0.1.4 upgrade/uninstall/reinstall, screen-reader, IME, complete control-state contrast, and packaged performance qualification remain untested. Local clean-install evidence is in `artifacts/qualification/margin-0.1.4-install.json`.
 
 Qualification fixtures live under `artifacts/qualification`, outside personal document folders. Installer lifecycle tests compare fixture/settings hashes and default association values before and after each operation.
