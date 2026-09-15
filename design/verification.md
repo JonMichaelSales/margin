@@ -1,6 +1,6 @@
 # Margin verification record
 
-Recorded through 11 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
+Recorded through 14 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
 
 ## Current build checks
 
@@ -22,7 +22,8 @@ Palette contrast tests cover primary/secondary/link colors of the six Margin ski
 - MDPlayer 0.1.1 x64 and ARM64 installers finished building. Its x64 upgrade/uninstall/reinstall passed; native UI automation was stopped by the user before final installed interaction checks.
 - Margin 0.1.2 x64 and ARM64 installers built successfully. The x64 upgrade from MDPlayer 0.1.1, uninstall, and reinstall all passed. Settings and document fixture SHA-256 values and default associations were unchanged. The legacy apphost was removed; existing handler commands resolve to `Margin.exe`; installed product metadata is Margin; the Margin Start Menu shortcut points to the new executable.
 - Rename evidence is in `artifacts/qualification/margin-0.1.2-windows-lifecycle.json` and corresponding versioned installer logs. The earlier `windows-lifecycle.json` remains the MDPlayer 0.1.0 → 0.1.1 record.
-- The installed Margin UI has not been exercised natively. No screen-reader, IME, complete control-state contrast, or packaged performance qualification is implied by these installer checks.
+- Margin 0.1.4 x64 was published self-contained from clean commit `21bc8843878941c82bcdb922837c61f2c6812605`, packaged with Inno Setup, checksum-verified, and installed cleanly for the current user. The installed application and renderer binaries match the publish output; Add/Remove Programs reports 0.1.4; the Start Menu shortcut and quoted Markdown handler are present. The installed executable opened `design/canonical-design.md` in a responsive native window with product version `0.1.4+21bc8843878941c82bcdb922837c61f2c6812605`.
+- Margin 0.1.4 upgrade/uninstall/reinstall, screen-reader, IME, complete control-state contrast, and packaged performance qualification remain untested. Local clean-install evidence is in `artifacts/qualification/margin-0.1.4-install.json`.
 
 Qualification fixtures live under `artifacts/qualification`, outside personal document folders. Installer lifecycle tests compare fixture/settings hashes and default association values before and after each operation.
 
@@ -30,7 +31,7 @@ Qualification fixtures live under `artifacts/qualification`, outside personal do
 
 | Target | Built | Installed | Native qualification |
 |---|---|---|---|
-| Windows x64 | Margin 0.1.2 yes | Margin 0.1.2 yes; upgrade/uninstall/reinstall passed | Earlier MDPlayer launch/read smoke evidence; Margin native interaction and full matrix open |
+| Windows x64 | Margin 0.1.4 yes | Margin 0.1.4 clean install passed; 0.1.2 upgrade/uninstall/reinstall passed | 0.1.4 installed launch and canonical-document smoke passed; full matrix open |
 | Windows ARM64 | Margin 0.1.2 yes | No | No ARM64 hardware execution |
 | Mac Intel | No | No | Later Mac session; Rosetta is not native Intel evidence |
 | Mac Apple Silicon | No | No | Later MacBook session |
