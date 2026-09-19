@@ -25,6 +25,7 @@ Palette contrast tests cover primary/secondary/link colors of the six Margin ski
 - Margin 0.1.4 x64 was published self-contained from clean commit `21bc8843878941c82bcdb922837c61f2c6812605`, packaged with Inno Setup, checksum-verified, and installed cleanly for the current user. The installed application and renderer binaries match the publish output; Add/Remove Programs reports 0.1.4; the Start Menu shortcut and quoted Markdown handler are present. The installed executable opened `design/canonical-design.md` in a responsive native window with product version `0.1.4+21bc8843878941c82bcdb922837c61f2c6812605`.
 - The final 0.1.4 x64 installer was regenerated from clean, pushed commit `a5a82ffcfcd31dca93c7c69f955ec0e20940858f` and reinstalled after a temporary D: volume disconnect cleared. Installer SHA-256: `b2f8bd83f510ee66136a9737bd129deba6bae7b57a2a82ecbdd5c1e1378e02fe`. The installed launcher, application assembly, renderer assembly, and metadata exactly match the publish output; the installed application opened the canonical Markdown design and reports `0.1.4+a5a82ffcfcd31dca93c7c69f955ec0e20940858f`.
 - Margin 0.1.4 upgrade/uninstall/reinstall, screen-reader, IME, complete control-state contrast, and packaged performance qualification remain untested. Local clean-install evidence is in `artifacts/qualification/margin-0.1.4-install.json`.
+- Margin 0.1.5 x64 was published and installed from clean commit `e8b29403646219814127745ccb3b72b002c880d0`. Installer SHA-256: `e3a3647a266c0a20f1caab46632ce0c0a2be8b53fafacd6a46891077530dfe77`. Windows registered `Software\Margin\Capabilities` under the per-user `RegisteredApplications` catalog, with both `.md` and `.markdown` mapped to `MDPlayer.Markdown`. Add/Remove Programs reports 0.1.5; installed files match the publish output; the native application opened the canonical design and reports `0.1.5+e8b29403646219814127745ccb3b72b002c880d0`. Setup's choice remains unchecked by default, the silent qualification install did not launch Settings, and the installer contains no protected `UserChoice` writes.
 
 Qualification fixtures live under `artifacts/qualification`, outside personal document folders. Installer lifecycle tests compare fixture/settings hashes and default association values before and after each operation.
 
@@ -32,7 +33,7 @@ Qualification fixtures live under `artifacts/qualification`, outside personal do
 
 | Target | Built | Installed | Native qualification |
 |---|---|---|---|
-| Windows x64 | Margin 0.1.4 yes | Margin 0.1.4 clean install passed; 0.1.2 upgrade/uninstall/reinstall passed | 0.1.4 installed launch and canonical-document smoke passed; full matrix open |
+| Windows x64 | Margin 0.1.5 yes | Margin 0.1.5 install and Default Apps registration passed; 0.1.2 upgrade/uninstall/reinstall passed | 0.1.5 installed launch and canonical-document smoke passed; full matrix open |
 | Windows ARM64 | Margin 0.1.2 yes | No | No ARM64 hardware execution |
 | Mac Intel | No | No | Later Mac session; Rosetta is not native Intel evidence |
 | Mac Apple Silicon | No | No | Later MacBook session |
