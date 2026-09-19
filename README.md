@@ -2,7 +2,7 @@
 
 **A little room to read.**
 
-A native C# / Avalonia Markdown reader and explicit editor. Personal testing release **0.1.4**. The application is implemented and under qualification; the complete acceptance matrix is not yet passed.
+A native C# / Avalonia Markdown reader and explicit editor. Personal testing release **0.1.5**. The application is implemented and under qualification; the complete acceptance matrix is not yet passed.
 
 Files open in rendered **Read** mode. Choose **Edit** or **Split** to change the buffer, then **Save** deliberately. Appearance and reading preferences are stored separately from documents. There is no autosave, recent-file history, document recovery, or session restoration.
 
@@ -33,7 +33,7 @@ On Windows, install the exact Inno Setup compiler recorded in `packaging/windows
 ./scripts/Package-Windows.ps1 -Architecture arm64
 ```
 
-Installers are written to `artifacts/installers`, with SHA-256 sidecars. They install per user, include .NET, and register Margin as an available Markdown handler without changing the default handler. Ordinary uninstall preserves settings and Markdown documents. The application must be closed before updating or uninstalling.
+Installers are written to `artifacts/installers`, with SHA-256 sidecars. They install per user, include .NET, and register Margin as an available Markdown handler. Setup can optionally open Margin's Windows Default Apps page; Margin also exposes the same choice in the application. Windows records the user's selection, and installation never silently takes over the default. Ordinary uninstall preserves settings and Markdown documents. The application must be closed before updating or uninstalling.
 
 Mac app bundles and DMGs will be built and exercised in the later MacBook session. See [the Mac handoff](design/macbook-handoff.md). The packaging script requires macOS and uses local/ad-hoc signing.
 

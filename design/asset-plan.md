@@ -21,7 +21,7 @@ The following allocation carries forward the workshop proposal. Only the two too
 | Mac application and Dock | Platform-adapted primary application icon | Existing PNG iconset; final Margin treatment and Mac output remain pending |
 | Windows installer executable | Primary application icon | Uses the current application icon |
 | Windows installer screens | Symbol, name, tagline in a header; installation instructions | Standard wizard currently; branded header allocation proposed |
-| Add/Remove Programs | Primary icon; Margin name; separate version and publisher fields | Margin 0.1.4 is registered with the primary icon, clean product name, separate version, and publisher fields |
+| Add/Remove Programs | Primary icon; Margin name; separate version and publisher fields | Margin 0.1.5 uses the primary icon, clean product name, separate version, and publisher fields |
 | Associated Markdown files | Distinct document-file icon with a small Margin identifier | Currently uses the application icon; distinct asset missing |
 | Mac DMG | App icon, Applications shortcut, short installation instruction | Packaging structure exists; background/layout artwork is undecided |
 | Main toolbar | Symbol only beside document title | Confirmed; current `m↓` text mark is preliminary |

@@ -25,11 +25,11 @@ Run from the repository root:
 
 ```sh
 pwsh -NoProfile -File scripts/Build.ps1 -Configuration Release
-bash scripts/package-macos.sh osx-arm64 0.1.4
-bash scripts/package-macos.sh osx-x64 0.1.4
+bash scripts/package-macos.sh osx-arm64 0.1.5
+bash scripts/package-macos.sh osx-x64 0.1.5
 ```
 
-Expected outputs are `artifacts/installers/Margin-0.1.4-osx-arm64.dmg` and `Margin-0.1.4-osx-x64.dmg`, each with a SHA-256 sidecar. The DMG contains Margin.app and an Applications shortcut. Runtime files, dependency notices, licenses, build metadata, and file checksums are inside the bundle. The scripts sign Mach-O binaries and the bundle ad-hoc, verify the signature, create the DMG, and verify its image structure. Packaging does not remove quarantine or alter Gatekeeper policy.
+Expected outputs are `artifacts/installers/Margin-0.1.5-osx-arm64.dmg` and `Margin-0.1.5-osx-x64.dmg`, each with a SHA-256 sidecar. The DMG contains Margin.app and an Applications shortcut. Runtime files, dependency notices, licenses, build metadata, and file checksums are inside the bundle. The scripts sign Mach-O binaries and the bundle ad-hoc, verify the signature, create the DMG, and verify its image structure. Packaging does not remove quarantine or alter Gatekeeper policy.
 
 If locked restore fails, inspect the exact SDK/runtime graph discrepancy. Do not silently upgrade Avalonia or regenerate locks to a different package set. The Windows development verification record must not be copied as Mac evidence.
 

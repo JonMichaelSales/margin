@@ -1,5 +1,5 @@
 #ifndef AppVersion
-  #define AppVersion "0.1.4"
+  #define AppVersion "0.1.5"
 #endif
 #ifndef TargetArch
   #define TargetArch "x64"
@@ -50,6 +50,7 @@ AppMutex=MDPlayer.Running
 
 [Tasks]
 Name: desktopicon; Description: "Create a desktop shortcut"; Flags: unchecked
+Name: defaultapp; Description: "Choose Margin as the default app for .md and .markdown files after setup"; Flags: unchecked
 
 [Files]
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -81,8 +82,16 @@ Root: HKCU; Subkey: "Software\Classes\Applications\Margin.exe\SupportedTypes"; V
 Root: HKCU; Subkey: "Software\Classes\Applications\MDPlayer.Desktop.exe"; ValueType: string; ValueName: FriendlyAppName; ValueData: Margin; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Classes\Applications\MDPlayer.Desktop.exe\shell\open\command"; ValueType: string; ValueData: """{app}\Margin.exe"" ""%1"""
 
+Root: HKCU; Subkey: "Software\Margin\Capabilities"; ValueType: string; ValueName: "ApplicationName"; ValueData: "Margin"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\Margin\Capabilities"; ValueType: string; ValueName: "ApplicationDescription"; ValueData: "Read and explicitly edit Markdown documents with Margin."
+Root: HKCU; Subkey: "Software\Margin\Capabilities"; ValueType: string; ValueName: "ApplicationIcon"; ValueData: "{app}\Margin.exe,0"
+Root: HKCU; Subkey: "Software\Margin\Capabilities\FileAssociations"; ValueType: string; ValueName: ".md"; ValueData: "MDPlayer.Markdown"
+Root: HKCU; Subkey: "Software\Margin\Capabilities\FileAssociations"; ValueType: string; ValueName: ".markdown"; ValueData: "MDPlayer.Markdown"
+Root: HKCU; Subkey: "Software\RegisteredApplications"; ValueType: string; ValueName: "Margin"; ValueData: "Software\Margin\Capabilities"; Flags: uninsdeletevalue
+
 [Run]
 Filename: "{app}\Margin.exe"; Description: "Open Margin"; Flags: nowait postinstall skipifsilent unchecked
+Filename: "ms-settings:defaultapps?registeredAppUser=Margin"; Description: "Choose Margin as the default Markdown app"; Tasks: defaultapp; Flags: shellexec postinstall skipifsilent unchecked
 
 [Code]
 function InitializeUninstall(): Boolean;

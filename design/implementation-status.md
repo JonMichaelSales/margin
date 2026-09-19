@@ -1,6 +1,6 @@
 # Margin implementation record
 
-Updated 14 September 2026. Personal test version 0.1.4.
+Updated 19 September 2026. Personal test version 0.1.5.
 
 ## Implemented
 
@@ -15,10 +15,11 @@ Updated 14 September 2026. Personal test version 0.1.4.
 - Explicit save/save-as, BOM/encoding/newline preservation, external-change checks, sibling temporary writes and replacement, dirty guards, and preservation of edits after save failures or file deletion.
 - Command-line, Open, drag/drop, and platform file-activation routes; one document per window; no document autosave or history.
 - Per-user Inno Setup packaging for x64/ARM64; self-contained publishing, icon assets, notices and hashes; macOS bundle/DMG scripts and later-session handoff.
+- Windows Default Apps capabilities for `.md` and `.markdown`, an unchecked setup option that opens Margin's system association page, and an in-app Default app command. Windows retains the explicit user choice.
 
 ## Verification so far
 
-The Release build has zero warnings/errors and **48 automated tests pass**. The tests include actual Skia compositor drawing, semantic table rendering and cell accessibility, exact bidirectional source mapping, rich table content, keyboard link traversal, PNG/JPEG/GIF/BMP/WebP header safety, all 18 palettes across Read/Edit/Split, editor identity/undo/selection preservation, continuous reader selection, encoding round trips, settings isolation, failed theme rollback, deferred whole-document selection, and migration of all six saved application skin names to Margin.
+The Release build has zero warnings/errors and **49 automated tests pass**. The tests include actual Skia compositor drawing, semantic table rendering and cell accessibility, exact bidirectional source mapping, rich table content, keyboard link traversal, Windows default-app routing, PNG/JPEG/GIF/BMP/WebP header safety, all 18 palettes across Read/Edit/Split, editor identity/undo/selection preservation, continuous reader selection, encoding round trips, settings isolation, failed theme rollback, deferred whole-document selection, and migration of all six saved application skin names to Margin.
 
 Margin 0.1.4 x64 was built from a clean source commit, checksum-verified, installed for the current user, and launched natively with the canonical design. Its installed application and renderer binaries match the publish output; Add/Remove Programs, the Start Menu shortcut, and the quoted Markdown handler were verified. The earlier 0.1.2 x64 upgrade/uninstall/reinstall cycle passed while preserving settings, fixture bytes, and default associations, and a 0.1.2 ARM64 installer was built. No Windows ARM64 execution or Mac execution has been performed. See [verification.md](verification.md).
 

@@ -1,4 +1,4 @@
-param([string]$Version = '0.1.4')
+param([string]$Version = '0.1.5')
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $installer = Join-Path $root "artifacts/installers/Margin-$Version-win-x64-setup.exe"

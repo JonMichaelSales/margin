@@ -4,7 +4,7 @@ Recorded through 15 September 2026. This record distinguishes implemented source
 
 ## Current build checks
 
-`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **48 passed tests**, and a successful fixed-color audit. Six migration cases verify that previously saved MDPlayer skin selections become their corresponding Margin selections without rewriting the settings file or changing reading/window preferences.
+`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **49 passed tests**, and a successful fixed-color audit. Six migration cases verify that previously saved MDPlayer skin selections become their corresponding Margin selections without rewriting the settings file or changing reading/window preferences. The Windows default-app test verifies that Margin's in-app action targets its per-user `registeredAppUser` settings page and that the command is visible only on Windows.
 
 Test output: `tests/MDPlayer.Tests/TestResults/MDPlayer.trx` (generated locally, excluded from Git). Tests exercise the real Avalonia/Skia compositor in a headless platform, including scrolling and font changes that previously exposed a render invalidation crash. That crash was fixed by deferring measure invalidation out of the render callback.
 

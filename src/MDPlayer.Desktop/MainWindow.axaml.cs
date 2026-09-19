@@ -56,6 +56,7 @@ public partial class MainWindow : Window
         Width = Math.Clamp(geometry.Width, 720, 2560); Height = Math.Clamp(geometry.Height, 480, 1600);
         if (geometry.Maximized) WindowState = WindowState.Maximized;
         ConfigureIcons(); WireCommands(); WireTypography(); BuildNativeMenu();
+        C<Button>("DefaultAppButton").IsVisible = _platform.CanChooseDefaultMarkdownApp;
         _reader.Preferences = _vm.Reading;
         C<ListBox>("OutlineList").ItemTemplate = new FuncDataTemplate<OutlineEntry>((item, _) => new TextBlock { Text = item?.Title, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(Math.Max(0, (item?.Level ?? 1) - 1) * 8, 5, 0, 5), FontSize = 12 });
         C<ListBox>("OutlineList").SelectionChanged += (_, _) => { if (C<ListBox>("OutlineList").SelectedItem is OutlineEntry entry) _reader.GoToSource(entry.SourceStart); };
@@ -114,6 +115,11 @@ public partial class MainWindow : Window
         Bind("NextFindButton", () => Find(false)); Bind("PreviousFindButton", () => Find(true));
         C<TextBox>("FindText").KeyDown += (_, e) => { if (e.Key == Key.Enter) { Find(e.KeyModifiers.HasFlag(KeyModifiers.Shift)); e.Handled = true; } };
         BindAsync("AppearanceButton", async () => { try { await new AppearanceWindow(_appearance).ShowDialog(this); } catch (Exception ex) { ShowError(ex); } });
+        Bind("DefaultAppButton", () =>
+        {
+            try { _platform.OpenDefaultMarkdownAppSettings(); ShowMessage("Windows Default Apps opened. Choose Margin for .md and .markdown files."); }
+            catch (Exception ex) { ShowError(ex); }
+        });
         BindAsync("SaveButton", async () => { await SaveAsync(); }); BindAsync("SaveAsButton", async () => { await SaveAsync(true); });
         BindAsync("ReloadButton", async () => { if (Session.FilePath is { } path && await GuardChangesAsync()) await OpenDocumentAsync(path); });
         Bind("DismissBanner", () => C<Border>("Banner").IsVisible = false);

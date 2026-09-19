@@ -35,8 +35,17 @@ public sealed class IconIntegrationTests
             Assert.True(((StackPanel)focus.Content!).Children.OfType<TextBlock>().Single().IsVisible);
             Assert.Equal("exit-focus", ((StackPanel)focus.Content!).Children.OfType<AppIcon>().Single().Kind);
             Assert.NotNull(window.FindControl<ScrollViewer>("EmptyPanel"));
+            var defaultApp = window.FindControl<Button>("DefaultAppButton")!;
+            Assert.Equal(OperatingSystem.IsWindows(), defaultApp.IsVisible);
+            Assert.Contains(".md", ToolTip.GetTip(defaultApp)?.ToString());
         }
         finally { window.Close(); }
+    }
+
+    [Fact]
+    public void WindowsDefaultAppLinkTargetsMarginsPerUserRegistration()
+    {
+        Assert.Equal("ms-settings:defaultapps?registeredAppUser=Margin", PlatformIntegration.WindowsDefaultAppsUri.AbsoluteUri);
     }
 
     [AvaloniaFact]
