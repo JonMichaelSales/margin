@@ -29,6 +29,7 @@ public sealed class MarkdownDocumentView : Control
     private double[] _tops = [0], _heights = [];
     private double _layoutWidth, _viewportTop, _viewportHeight = 900;
     private int _selectionAnchor, _selectionEnd, _activeLinkIndex = -1;
+    private bool _hasWideBlocks;
     private bool _dragging, _measurePending, _selectAllWhenComplete;
     public event Action? IndexingPending;
     public event Action<string>? LinkInvoked;
@@ -54,6 +55,7 @@ public sealed class MarkdownDocumentView : Control
             _images?.Dispose(); _imageDocumentPath = DocumentPath; _images = new() { DocumentPath = DocumentPath };
             _images.Changed += () => { _pendingAnchor ??= CaptureReadingAnchor(); ClearLayouts(); InvalidateMeasure(); InvalidateVisual(); };
         }
+        _hasWideBlocks = document.Blocks.Any(IsWideBlock);
         var sameRevision = _document.Revision == document.Revision; _document = document; _selectionAnchor = sameRevision ? Math.Min(_selectionAnchor, document.PlainText.Length) : 0; _selectionEnd = sameRevision ? Math.Min(_selectionEnd, document.PlainText.Length) : 0; if (!sameRevision) _activeLinkIndex = -1; if (_selectAllWhenComplete && sameRevision && document.IsComplete) { _selectionAnchor = 0; _selectionEnd = document.PlainText.Length; }
         if (!sameRevision || document.IsComplete) _selectAllWhenComplete = false;
         ResetLayout(); (ControlAutomationPeer.FromElement(this) as DocumentAutomationPeer)?.Refresh();
@@ -122,7 +124,7 @@ public sealed class MarkdownDocumentView : Control
     }
     protected override Size MeasureOverride(Size availableSize)
     {
-        var width = Math.Max(160, Math.Min(double.IsFinite(availableSize.Width) ? availableSize.Width : 800, _preferences.WidthCharacters * _preferences.FontSize * .54 + 64));
+        var width = _hasWideBlocks && double.IsFinite(availableSize.Width) ? availableSize.Width : _preferences.MeasureWidth(availableSize.Width);
         if (Math.Abs(width - _layoutWidth) > .5)
         {
             if (_layoutWidth > 0) _pendingAnchor ??= CaptureReadingAnchor();
@@ -130,7 +132,7 @@ public sealed class MarkdownDocumentView : Control
             for (int i = 0; i < _heights.Length; i++)
             {
                 var block = _document.Blocks[i]; var font = FontSizeFor(block);
-                var chars = Math.Max(10, (width - 64 - block.Indent * 20) / (font * .53));
+                var chars = Math.Max(10, (BlockWidth(block) - 64 - block.Indent * 20) / (font * .53));
                 _heights[i] = block.Kind switch
                 {
                     DocumentBlockKind.Rule => 30,
@@ -147,12 +149,21 @@ public sealed class MarkdownDocumentView : Control
         }
         return new Size(width, _tops[^1] + 64);
     }
+    private static bool IsWideBlock(DocumentBlock block) => block.Kind is DocumentBlockKind.Table or DocumentBlockKind.Code or DocumentBlockKind.Image || block.Images?.Count > 0;
+    private double BlockWidth(DocumentBlock block) => IsWideBlock(block) ? _layoutWidth : _preferences.MeasureWidth(_layoutWidth);
+    private double BlockX(DocumentBlock block) => (_layoutWidth - BlockWidth(block)) / 2 + 32 + block.Indent * 20;
     private double FontSizeFor(DocumentBlock block) => block.Kind switch
     {
-        DocumentBlockKind.Heading => _preferences.FontSize * (block.Level == 1 ? 1.9 : block.Level == 2 ? 1.45 : 1.18),
+        DocumentBlockKind.Heading => _preferences.FontSize * (block.Level == 1 ? 2.15 : block.Level == 2 ? 1.6 : 1.25),
         DocumentBlockKind.Code or DocumentBlockKind.Table => _preferences.FontSize * .83, _ => _preferences.FontSize
     };
-    private double Gap(DocumentBlock block) => block.Continues ? 0 : _preferences.FontSize * _preferences.ParagraphGap + (block.Kind == DocumentBlockKind.Heading ? 18 : 8);
+    private double Gap(DocumentBlock block) => block.Continues ? 0 : block.Kind switch
+    {
+        DocumentBlockKind.Heading => _preferences.FontSize * .85 + 12,
+        DocumentBlockKind.Code or DocumentBlockKind.Table or DocumentBlockKind.Quote => _preferences.FontSize * .9 + 16,
+        _ when block.Indent > 0 => _preferences.FontSize * .3 + 4,
+        _ => _preferences.FontSize * _preferences.ParagraphGap + 8
+    };
     private TextLayout Layout(int i)
     {
         if (_layouts.TryGetValue(i, out var existing)) return existing;
@@ -161,7 +172,7 @@ public sealed class MarkdownDocumentView : Control
         var family = new FontFamily(mono ? "Cascadia Mono, Menlo, monospace" : _preferences.FontFamily);
         var typeface = new Typeface(family, block.Kind == DocumentBlockKind.Quote ? FontStyle.Italic : FontStyle.Normal,
             block.Kind == DocumentBlockKind.Heading ? FontWeight.SemiBold : FontWeight.Normal);
-        var color = Brush(block.Kind == DocumentBlockKind.Quote ? "AccentBlueBrush" : "TextPrimaryBrush");
+        var color = Brush("TextPrimaryBrush");
         var spans = new List<ValueSpan<TextRunProperties>>();
         foreach (var run in block.Runs ?? [])
         {
@@ -170,7 +181,8 @@ public sealed class MarkdownDocumentView : Control
                 run.Style.HasFlag(InlineStyle.Bold) ? FontWeight.Bold : typeface.Weight);
             spans.Add(new(run.Start + PrefixLength(block), run.Length, new GenericTextRunProperties(face, fontSize,
                 textDecorations: run.Style.HasFlag(InlineStyle.Strike) ? TextDecorations.Strikethrough : run.Link is not null ? TextDecorations.Underline : null,
-                foregroundBrush: run.Link is not null ? Brush("AccentBlueBrush") : color)));
+                foregroundBrush: run.Link is not null ? Brush("AccentBlueBrush") : color,
+                backgroundBrush: run.Style.HasFlag(InlineStyle.Code) ? Brush("BackgroundLightBrush") : null)));
         }
         var prefix = PrefixLength(block);
         if (prefix > 0) spans.Insert(0, new(0, 1, new GenericTextRunProperties(typeface, fontSize * _preferences.FirstLineIndent, foregroundBrush: color)));
@@ -179,7 +191,7 @@ public sealed class MarkdownDocumentView : Control
             text += _images?.Get(target) is not null ? "" : "\n" + (_images?.Error(target) ?? (DocumentImageCache.IsRemote(target) ? "Remote image · click to load" : "Loading local image…"));
         var layout = new TextLayout(text, typeface, fontSize, color,
             textAlignment: _preferences.Justified && block.Kind == DocumentBlockKind.Paragraph ? TextAlignment.Justify : TextAlignment.Start,
-            flowDirection: mono ? FlowDirection.LeftToRight : ParagraphDirection.Detect(block.Text), textWrapping: TextWrapping.Wrap, maxWidth: Math.Max(100, _layoutWidth - 64 - block.Indent * 20),
+            flowDirection: mono ? FlowDirection.LeftToRight : ParagraphDirection.Detect(block.Text), textWrapping: TextWrapping.Wrap, maxWidth: Math.Max(100, BlockWidth(block) - 64 - block.Indent * 20),
             lineHeight: fontSize * _preferences.LineHeight, textStyleOverrides: spans);
         _layouts[i] = layout;
         UpdateMeasuredHeight(i, layout.Height + Gap(block) + ImageAreaHeight(block.Images));
@@ -199,7 +211,7 @@ public sealed class MarkdownDocumentView : Control
     {
         if (_tableLayouts.TryGetValue(index, out var existing)) return existing;
         var block = _document.Blocks[index]; var table = block.Table ?? throw new InvalidOperationException("Table block is missing table data.");
-        var availableWidth = Math.Max(160, _layoutWidth - 64 - block.Indent * 20);
+        var availableWidth = Math.Max(160, BlockWidth(block) - 64 - block.Indent * 20);
         var columns = Math.Max(1, table.Columns);
         var weights = Enumerable.Range(0, columns).Select(column =>
             Math.Clamp(table.Cells.Where(x => x.Column == column).Select(x => x.Text.Length).DefaultIfEmpty(8).Max(), 8, 48)).ToArray();
@@ -241,7 +253,8 @@ public sealed class MarkdownDocumentView : Control
                 run.Style.HasFlag(InlineStyle.Bold) || header ? FontWeight.Bold : FontWeight.Normal);
             spans.Add(new(run.Start, run.Length, new GenericTextRunProperties(face, fontSize,
                 textDecorations: run.Style.HasFlag(InlineStyle.Strike) ? TextDecorations.Strikethrough : run.Link is not null ? TextDecorations.Underline : null,
-                foregroundBrush: run.Link is not null ? Brush("AccentBlueBrush") : color)));
+                foregroundBrush: run.Link is not null ? Brush("AccentBlueBrush") : color,
+                backgroundBrush: run.Style.HasFlag(InlineStyle.Code) ? Brush("BackgroundLightBrush") : null)));
         }
         return new TextLayout(text, typeface, fontSize, color, textWrapping: TextWrapping.Wrap,
             maxWidth: Math.Max(40, width), lineHeight: fontSize * _preferences.LineHeight, textStyleOverrides: spans,
@@ -258,14 +271,14 @@ public sealed class MarkdownDocumentView : Control
             .SelectMany(b => b.Images ?? []).Select(x => x.Target).ToHashSet());
         for (int i = start; i < _document.Blocks.Count && _tops[i] < _viewportTop + _viewportHeight + 400; i++)
         {
-            last = i; var block = _document.Blocks[i]; var y = _tops[i] + 24; var x = 32 + block.Indent * 20;
+            last = i; var block = _document.Blocks[i]; var y = _tops[i] + 24; var x = BlockX(block);
             if (block.Kind == DocumentBlockKind.Table)
             {
                 var table = TableLayout(i);
                 foreach (var cell in table.Cells)
                 {
                     var bounds = cell.Bounds.Translate(new Vector(x, y));
-                    context.DrawRectangle(cell.Cell.IsHeader ? Brush("SecondaryColorBrush") : Brush("BackgroundLightBrush"), new Pen(Brush("BorderBrush"), 1), bounds);
+                    context.DrawRectangle(cell.Cell.IsHeader ? Brush("SecondaryColorBrush") : Brush(cell.Cell.Row % 2 == 0 ? "BackgroundLightBrush" : "BackgroundBrush"), new Pen(Brush("BorderBrush"), 1), bounds);
                     DrawSelection(context, cell.Layout, block, cell.Cell.TextStart, cell.Cell.Text.Length, new Point(bounds.X + 8, bounds.Y + 8));
                     cell.Layout.Draw(context, new Point(bounds.X + 8, bounds.Y + 8));
                     var imageTop = bounds.Y + 8 + cell.Layout.Height;
@@ -279,9 +292,13 @@ public sealed class MarkdownDocumentView : Control
             }
             var layout = Layout(i);
             if (block.Kind == DocumentBlockKind.Code)
-                context.DrawRectangle(Brush("BackgroundLightBrush"), null, new Rect(x - 12, y - 8, Math.Max(100, _layoutWidth - x - 20), layout.Height + 16), 6, 6);
-            if (block.Kind == DocumentBlockKind.Quote) context.DrawRectangle(Brush("AccentBlueBrush"), null, new Rect(x - 16, y, 3, layout.Height));
-            if (block.Kind == DocumentBlockKind.Rule) context.DrawLine(new Pen(Brush("BorderBrush"), 1), new Point(x, y + 8), new Point(_layoutWidth - 32, y + 8));
+                context.DrawRectangle(Brush("BackgroundLightBrush"), new Pen(Brush("BorderBrush"), 1), new Rect(x - 12, y - 8, Math.Max(100, BlockWidth(block) - block.Indent * 20 - 40), layout.Height + 16), 10, 10);
+            if (block.Kind == DocumentBlockKind.Quote)
+            {
+                context.DrawRectangle(Brush("BackgroundLightBrush"), new Pen(Brush("BorderBrush"), 1), new Rect(x - 12, y - 8, Math.Max(100, BlockWidth(block) - block.Indent * 20 - 40), layout.Height + 16), 8, 8);
+                context.DrawRectangle(Brush("AccentBlueBrush"), null, new Rect(x - 16, y - 8, 3, layout.Height + 16), 1.5, 1.5);
+            }
+            if (block.Kind == DocumentBlockKind.Rule) context.DrawLine(new Pen(Brush("BorderBrush"), 1), new Point(x, y + 8), new Point(x + BlockWidth(block) - 64 - block.Indent * 20, y + 8));
             else
             {
                 DrawSelection(context, layout, block, 0, block.Text.Length, new Point(x, y), PrefixLength(block));
@@ -289,7 +306,7 @@ public sealed class MarkdownDocumentView : Control
                 var imageTop = y + layout.Height;
                 foreach (var image in block.Images ?? [])
                 {
-                    DrawImagePanel(context, image.Target, new Rect(x, imageTop + 8, Math.Max(100, _layoutWidth - x - 32), 264));
+                    DrawImagePanel(context, image.Target, new Rect(x, imageTop + 8, Math.Max(100, BlockWidth(block) - 64 - block.Indent * 20), 264));
                     imageTop += 280;
                 }
             }
@@ -325,13 +342,13 @@ public sealed class MarkdownDocumentView : Control
         var i = BlockAt(point.Y - 24); var block = _document.Blocks[i];
         if (block.Kind == DocumentBlockKind.Table)
         {
-            var local = new Point(point.X - 32 - block.Indent * 20, point.Y - 24 - _tops[i]);
+            var local = new Point(point.X - BlockX(block), point.Y - 24 - _tops[i]);
             var table = TableLayout(i);
             var cell = table.Cells.FirstOrDefault(x => x.Bounds.Contains(local)) ?? table.Cells.OrderBy(x => Math.Abs(x.Bounds.Center.Y - local.Y) + Math.Abs(x.Bounds.Center.X - local.X)).First();
             var cellHit = cell.Layout.HitTestPoint(new Point(local.X - cell.Bounds.X - 8, local.Y - cell.Bounds.Y - 8));
             return (i, Math.Clamp(cell.Cell.TextStart + cellHit.TextPosition, cell.Cell.TextStart, cell.Cell.TextStart + cell.Cell.Text.Length));
         }
-        var hit = Layout(i).HitTestPoint(new Point(point.X - 32 - block.Indent * 20, point.Y - 24 - _tops[i]));
+        var hit = Layout(i).HitTestPoint(new Point(point.X - BlockX(block), point.Y - 24 - _tops[i]));
         return (i, Math.Clamp(hit.TextPosition - PrefixLength(block), 0, block.Text.Length));
     }
     private Rect PositionRect(int index, int localPosition)
@@ -346,7 +363,7 @@ public sealed class MarkdownDocumentView : Control
     }
     private string? ImageTargetAt(int index, Point point)
     {
-        var block = _document.Blocks[index]; var localY = point.Y - 24 - _tops[index]; var localX = point.X - 32 - block.Indent * 20;
+        var block = _document.Blocks[index]; var localY = point.Y - 24 - _tops[index]; var localX = point.X - BlockX(block);
         if (block.Kind == DocumentBlockKind.Table)
         {
             var cell = TableLayout(index).Cells.FirstOrDefault(x => x.Bounds.Contains(new Point(localX, localY)));
@@ -444,7 +461,7 @@ public sealed class MarkdownDocumentView : Control
         for (var n = 0; n < _document.Blocks.Count; n++) { if (_document.Blocks[n].TextStart > _selectionEnd) break; index = n; }
         var block = _document.Blocks[index];
         var rect = PositionRect(index, Math.Clamp(_selectionEnd - block.TextStart, 0, block.Text.Length));
-        var point = new Point(rect.X + 32 + block.Indent * 20, _tops[index] + 24 + rect.Y + rect.Height / 2 + direction * (page ? _viewportHeight : rect.Height));
+        var point = new Point(rect.X + BlockX(block), _tops[index] + 24 + rect.Y + rect.Height / 2 + direction * (page ? _viewportHeight : rect.Height));
         var hit = Hit(point);
         return _document.Blocks[hit.Index].TextStart + hit.Position;
     }
@@ -555,7 +572,7 @@ public sealed class MarkdownDocumentView : Control
         {
             if (!Current || !owner._tableLayouts.TryGetValue(blockIndex, out var table) || TopLevel.GetTopLevel(owner) is not { } top || owner.TransformToVisual(top) is not { } transform) return default;
             var visual = table.Cells.FirstOrDefault(x => ReferenceEquals(x.Cell, cell));
-            return visual is null ? default : visual.Bounds.Translate(new Vector(32 + block.Indent * 20, owner._tops[blockIndex] + 24)).TransformToAABB(transform);
+            return visual is null ? default : visual.Bounds.Translate(new Vector(owner.BlockX(block), owner._tops[blockIndex] + 24)).TransformToAABB(transform);
         }
         protected override bool IsOffscreenCore()
         {

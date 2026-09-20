@@ -12,7 +12,7 @@ This revision incorporates the accepted SkinManager and installer plan. Implemen
 
 - One document per window. Additional files open additional windows. An empty launch shows Open and drag/drop guidance.
 - Read, Edit, and Split are explicit modes with a persistent unsaved indicator. A narrow Split workspace provides Read/Edit mode controls when two useful columns cannot fit.
-- The Paper shell is canonical: quiet toolbar, centered reading measure, optional outline, optional typography inspector, restrained status footer.
+- The Paper shell is canonical: grouped Read/Edit/Split controls, compact secondary actions with tooltips, a bordered document surface on a layered workspace, optional outline and typography inspector, and a restrained status footer. Tables, code, and images can use the workspace width while prose retains the selected reading measure.
 - No automatic document saves, recovery copies, recent-file list, session restoration, or document-content persistence in v1.
 - Settings contain appearance, reading defaults, editor typography, and window geometry. They are stored in Margin's application settings directory, outside document folders and Mac app bundles. Existing settings migrate once from the legacy MDPlayer directory while leaving the original file intact.
 - Reading adjustments apply immediately and save automatically after a short debounce. The typography panel reports saving, saved, and failed states and provides an explicit reset. These settings affect future windows without modifying any Markdown document.
@@ -22,7 +22,7 @@ This revision incorporates the accepted SkinManager and installer plan. Implemen
 
 The document is the primary surface. The toolbar places the Margin symbol only beside the document title, without repeating the wordmark or tagline. Chrome uses Inter at 14 DIP. Read, Edit, Split, Open, and saving actions retain clear text labels. Secondary actions (Outline, Typography, Find, Focus, Appearance) may collapse from icon-and-text controls to icons with tooltips when space is limited. The default reading face is Georgia at 18 DIP, line height 1.65, paragraph gap 0.8 em, and approximately 68 characters per line.
 
-Window defaults are 1280 × 860 DIP, bounded by the active screen's work area. Minimum workspace size is 720 × 480 DIP. The outline uses approximately 208 DIP; the typography panel approximately 272 DIP. Secondary toolbar actions can compact before wrapping remaining controls at small widths. Exact fit thresholds remain an implementation decision. Split requires enough room for both source and preview. Focus hides optional panels while retaining an obvious Exit focus action.
+Window defaults are 1280 × 860 DIP, bounded by the active screen's work area. Minimum workspace size is 720 × 480 DIP. The outline uses approximately 208 DIP; the typography panel approximately 272 DIP. Below 1000 DIP these controls become edge drawers over the workspace; Escape dismisses them. Secondary toolbar actions can compact before wrapping remaining controls at small widths. Exact fit thresholds remain an implementation decision. Split requires enough room for both source and preview. Focus hides optional panels while retaining an obvious Exit focus action.
 
 Control spacing uses a 4-DIP rhythm, generally 8–24 DIP gaps. Buttons have a 34-DIP minimum height, rounded corners, visible hover and keyboard focus states, and distinguishable disabled text. Compact icon controls retain accessible action names and tooltips available to pointer and keyboard users. Their meaning and selected state remain discoverable without relying only on color. Window geometry is restored only inside an available display area. See [asset placement](asset-plan.md) for the brand and interface asset workshop record; new artwork and its generation methods remain undecided.
 
@@ -68,7 +68,7 @@ The custom Appearance dialog has Follow system, a Margin group, an Included skin
 |---|---|
 | Empty | Open button, drag/drop target, no invented recent files or restored content |
 | Read, clean | Rendered source, optional outline/Find/type controls, explicit Edit action |
-| Typography | Font family, 12–32 DIP size, 1.2–2.2 line height, 0–1.8 em paragraph gap, 48–100 character measure, natural/justified alignment, optional first-line indentation, automatic preference persistence, and reset |
+| Typography | Font family, 12–32 DIP size, 1.2–2.2 line height, 0–1.8 em paragraph gap, Comfortable (68), Wide (110), Full workspace, or Custom (45–160 characters), natural/justified alignment, optional first-line indentation, automatic preference persistence, and reset |
 | Edit | Lazy-created AvaloniaEdit, source formatting, undo/redo, separate editor preferences |
 | Split | Source and native preview, source-span synchronization, debounced preview parsing |
 | Read, dirty | Current unsaved buffer rendered; Save and unsaved indicator remain visible |

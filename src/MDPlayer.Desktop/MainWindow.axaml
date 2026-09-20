@@ -6,10 +6,10 @@
 
         <StackPanel Margin="0,0,20,0" MinWidth="150" MaxWidth="280" VerticalAlignment="Center"><TextBlock Name="FileNameLabel" Text="Margin" TextTrimming="CharacterEllipsis" /><StackPanel Orientation="Horizontal"><icons:AppIcon Name="DirtyIcon" Kind="unsaved" Width="12" Height="14" IsVisible="False" Foreground="{DynamicResource AccentBlueBrush}" /><TextBlock Name="FileStateLabel" Text="A little room to read." Classes="secondary" FontSize="11" /></StackPanel></StackPanel>
         <Button Name="OpenButton" Content="Open" Margin="0,0,12,0" />
-        <Button Name="ReadButton" Content="Read" Classes="active" Margin="0,0,4,0" />
-        <Button Name="EditButton" Content="Edit" Margin="0,0,4,0" />
-        <Button Name="SplitButton" Content="Split" Margin="0,0,12,0" />
-        <Button Name="OutlineButton" Content="Outline" Margin="0,0,4,0" />
+        <Border Background="{DynamicResource SecondaryColorBrush}" CornerRadius="10" Padding="3" Margin="0,0,16,0"><StackPanel Orientation="Horizontal"><Button Name="ReadButton" Content="Read" Classes="mode active" Margin="0,0,2,0" />
+        <Button Name="EditButton" Classes="mode" Content="Edit" Margin="0,0,4,0" />
+        <Button Name="SplitButton" Classes="mode" Content="Split" Margin="0" />
+        </StackPanel></Border><Button Name="OutlineButton" Content="Outline" Margin="0,0,4,0" />
         <Button Name="TypeButton" Content="Aa · Type" Margin="0,0,4,0" />
         <Button Name="FindButton" Content="Find" Margin="0,0,4,0" />
         <Button Name="FocusButton" Content="Focus" Margin="0,0,4,0" />
@@ -24,8 +24,8 @@
     </StackPanel>
     <Grid Grid.Row="2" Name="DocumentGrid" ColumnDefinitions="208,*,0" IsVisible="False">
       <Border Name="OutlinePanel" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0" Padding="16,24"><DockPanel><TextBlock Text="ON THIS PAGE" FontSize="11" LetterSpacing="1" Classes="secondary" DockPanel.Dock="Top" Margin="0,0,0,16" /><ListBox Name="OutlineList" /></DockPanel></Border>
-      <Grid Name="Workspace" Grid.Column="1" ColumnDefinitions="*,0,0">
-        <ScrollViewer Name="DocumentScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><render:MarkdownDocumentView Name="Reader" HorizontalAlignment="Center" /></ScrollViewer>
+      <Grid Name="Workspace" Background="{DynamicResource WorkspaceBrush}" Grid.Column="1" ColumnDefinitions="*,0,0">
+        <ScrollViewer Name="DocumentScroll" Margin="20,20,20,24" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><Border Background="{DynamicResource DocumentSurfaceBrush}" BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1" CornerRadius="12" Padding="0" HorizontalAlignment="Center"><render:MarkdownDocumentView Name="Reader" HorizontalAlignment="Center" /></Border></ScrollViewer>
         <GridSplitter Name="PaneSplitter" Grid.Column="1" Width="5" Background="{DynamicResource BorderBrush}" IsVisible="False" />
         <DockPanel Name="EditorHost" Grid.Column="2" IsVisible="False" Margin="16">
           <WrapPanel DockPanel.Dock="Top" Name="EditToolbar" Margin="0,0,0,12">
@@ -36,13 +36,14 @@
       </Grid>
       <Border Name="TypePanel" Grid.Column="2" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0" Padding="20" IsVisible="False">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"><StackPanel Spacing="8">
-          <TextBlock Text="Make it yours" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Reading settings save automatically" Classes="secondary" FontSize="12" />
+          <TextBlock Text="Reading style" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Reading settings save automatically" Classes="secondary" FontSize="12" />
           <TextBlock Name="TypographySaveStatus" Text="Saved" Classes="secondary" FontSize="11" Margin="0,0,0,12" />
-          <TextBlock Text="Typeface" /><TextBox Name="FontFamilyBox" Text="Georgia" Watermark="Installed font name" />
+          <TextBlock Text="TYPEFACE" Classes="section" /><TextBox Name="FontFamilyBox" Text="Georgia" Watermark="Installed font name" />
           <TextBlock Name="FontSizeLabel" Text="Font size · 18" /><Slider Name="FontSizeSlider" Minimum="12" Maximum="32" TickFrequency="1" IsSnapToTickEnabled="True" Value="18" />
-          <TextBlock Name="LineHeightLabel" Text="Line height · 1.65" /><Slider Name="LineHeightSlider" Minimum="1.2" Maximum="2.2" TickFrequency="0.05" IsSnapToTickEnabled="True" Value="1.65" />
+          <TextBlock Text="SPACING" Classes="section" Margin="0,12,0,0" /><TextBlock Name="LineHeightLabel" Text="Line height · 1.65" /><Slider Name="LineHeightSlider" Minimum="1.2" Maximum="2.2" TickFrequency="0.05" IsSnapToTickEnabled="True" Value="1.65" />
           <TextBlock Name="ParagraphGapLabel" Text="Paragraph gap · 0.8 em" /><Slider Name="ParagraphGapSlider" Minimum="0" Maximum="1.8" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="0.8" />
-          <TextBlock Name="ReadingWidthLabel" Text="Reading width · 68 characters" /><Slider Name="ReadingWidthSlider" Minimum="48" Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Value="68" />
+          <TextBlock Text="READING WIDTH" Classes="section" Margin="0,12,0,0" /><ComboBox Name="WidthModeBox" HorizontalAlignment="Stretch"><ComboBoxItem Content="Custom" /><ComboBoxItem Content="Comfortable" /><ComboBoxItem Content="Wide" /><ComboBoxItem Content="Full workspace" /></ComboBox>
+          <TextBlock Name="ReadingWidthLabel" Text="Reading width · 68 characters" /><Slider Name="ReadingWidthSlider" Minimum="45" Maximum="160" TickFrequency="1" IsSnapToTickEnabled="True" Value="68" />
           <TextBlock Text="Alignment" /><ComboBox Name="AlignmentBox" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Natural" /><ComboBoxItem Content="Justified" /></ComboBox>
           <TextBlock Name="IndentLabel" Text="First-line indent · 0 em" /><Slider Name="IndentSlider" Minimum="0" Maximum="2" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="0" />
           <Button Name="ResetReadingButton" Content="Reset reading settings" Margin="0,16,0,0" /><Button Name="CloseTypeButton" Content="Close typography" />

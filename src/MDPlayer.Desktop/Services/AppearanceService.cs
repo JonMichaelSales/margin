@@ -112,6 +112,10 @@ public sealed class AppearanceService(ISkinManager manager, IUserPreferencesStor
             var onAccent = Contrast(choice.Skin.PrimaryTextColor, choice.Skin.AccentColor) >= Contrast(choice.Skin.PrimaryBackground, choice.Skin.AccentColor)
                 ? choice.Skin.PrimaryTextColor : choice.Skin.PrimaryBackground;
             app.Resources["OnAccentBrush"] = new SolidColorBrush(onAccent);
+            app.Resources["WorkspaceBrush"] = app.Resources["BackgroundLightBrush"];
+            app.Resources["DocumentSurfaceBrush"] = app.Resources["BackgroundBrush"];
+            app.Resources["SubtleBorderBrush"] = app.Resources["BorderBrush"];
+            app.Resources["ElevatedSurfaceBrush"] = app.Resources["PrimaryColorBrush"];
             // Fluent template aliases use the same SkinManager values, never an independent palette.
             foreach (var key in new[] { "SystemControlForegroundBaseHighBrush", "SystemControlForegroundBaseMediumBrush", "TextControlForeground", "TextControlForegroundFocused", "TextControlForegroundPointerOver", "ComboBoxForeground", "MenuFlyoutItemForeground" }) app.Resources[key] = app.Resources["TextPrimaryBrush"];
             foreach (var key in new[] { "TextControlBackground", "TextControlBackgroundFocused", "ComboBoxBackground", "MenuFlyoutPresenterBackground", "ToolTipBackground" }) app.Resources[key] = app.Resources["BackgroundLightBrush"];

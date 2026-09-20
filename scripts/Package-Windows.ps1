@@ -1,4 +1,4 @@
-param([ValidateSet('x64','arm64')][string]$Architecture = 'x64', [string]$Version = '0.1.5', [string]$Compiler = 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe')
+param([ValidateSet('x64','arm64')][string]$Architecture = 'x64', [string]$Version = '0.1.7', [string]$Compiler = 'C:/Program Files (x86)/Inno Setup 6/ISCC.exe')
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $toolchain = Get-Content (Join-Path $root 'packaging/windows/toolchain.json') -Raw | ConvertFrom-Json

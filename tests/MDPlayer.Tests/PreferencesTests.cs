@@ -63,7 +63,7 @@ public sealed class PreferencesTests : IDisposable
         var path = Path.Combine(_root, "preferences.json");
         var firstProcess = new UserPreferencesStore(path);
         firstProcess.Save(firstProcess.Current with { Theme = new(false, "Margin Paper Dark") });
-        firstProcess.Save(firstProcess.Current with { Reading = new() { FontFamily = "Atkinson Hyperlegible", FontSize = 24, WidthCharacters = 96 } });
+        firstProcess.Save(firstProcess.Current with { Reading = new() { FontFamily = "Atkinson Hyperlegible", FontSize = 24, WidthCharacters = 96, WidthMode = ReadingWidthMode.Full } });
         firstProcess.Save(firstProcess.Current with { Window = new(1440, 900, 20, 30, true) });
 
         var nextProcess = new UserPreferencesStore(path);
@@ -72,6 +72,7 @@ public sealed class PreferencesTests : IDisposable
         Assert.Equal("Atkinson Hyperlegible", nextProcess.Current.Reading.FontFamily);
         Assert.Equal(24, nextProcess.Current.Reading.FontSize);
         Assert.Equal(96, nextProcess.Current.Reading.WidthCharacters);
+        Assert.Equal(ReadingWidthMode.Full, nextProcess.Current.Reading.WidthMode);
         Assert.True(nextProcess.Current.Window.Maximized);
     }
     [Fact]

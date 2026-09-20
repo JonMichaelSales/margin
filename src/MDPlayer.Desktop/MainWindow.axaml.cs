@@ -40,7 +40,7 @@ public partial class MainWindow : Window
     private readonly DispatcherTimer _watchDebounce = new() { Interval = TimeSpan.FromMilliseconds(400) };
     private readonly DispatcherTimer _typographySaveDebounce = new() { Interval = TimeSpan.FromMilliseconds(400) };
     private bool _hasDocument, _changingEditor, _closingApproved, _closePending, _isSaving, _settingTypography, _syncing;
-    private bool _readingNeedsSave;
+    private bool _readingNeedsSave, _outlineDrawer;
     private string? _layoutSignature; private bool _outlineVisible = true, _typeVisible, _focusMode;
     private string? _initialPath;
     private long _openGeneration;
@@ -119,8 +119,8 @@ public partial class MainWindow : Window
         void BindAsync(string name, Func<Task> action) => C<Button>(name).Click += async (_, _) => await action();
         BindAsync("OpenButton", OpenPickerAsync); BindAsync("EmptyOpenButton", OpenPickerAsync);
         Bind("ReadButton", () => SetMode(DocumentMode.Read)); Bind("EditButton", () => SetMode(DocumentMode.Edit)); Bind("SplitButton", () => SetMode(DocumentMode.Split));
-        Bind("OutlineButton", () => { _outlineVisible = !_outlineVisible; UpdateLayoutMode(); });
-        Bind("TypeButton", () => { _typeVisible = !_typeVisible; _focusMode = false; UpdateLayoutMode(); if (_typeVisible) C<TextBox>("FontFamilyBox").Focus(); });
+        Bind("OutlineButton", () => { if (Bounds.Width < 1000) { _outlineDrawer = !_outlineDrawer; _typeVisible = false; } else _outlineVisible = !_outlineVisible; UpdateLayoutMode(); });
+        Bind("TypeButton", () => { _typeVisible = !_typeVisible; _outlineDrawer = false; _focusMode = false; UpdateLayoutMode(); if (_typeVisible) C<TextBox>("FontFamilyBox").Focus(); });
         Bind("CloseTypeButton", () => { _typeVisible = false; UpdateLayoutMode(); C<Button>("TypeButton").Focus(); });
         Bind("FocusButton", () => { _focusMode = !_focusMode; UpdateLayoutMode(); });
         Bind("FindButton", ShowFind); Bind("CloseFindButton", () => { C<Border>("FindBar").IsVisible = false; _reader.Focus(); });
@@ -149,6 +149,8 @@ public partial class MainWindow : Window
             slider.PropertyChanged += (_, e) => { if (e.Property == RangeBase.ValueProperty) UpdateTypography(); };
         }
         C<ComboBox>("AlignmentBox").SelectedIndex = _vm.Reading.Justified ? 1 : 0;
+        C<ComboBox>("WidthModeBox").SelectedIndex = (int)_vm.Reading.WidthMode;
+        C<ComboBox>("WidthModeBox").SelectionChanged += (_, _) => UpdateTypography();
         C<ComboBox>("AlignmentBox").SelectionChanged += (_, _) => UpdateTypography();
         C<TextBox>("FontFamilyBox").LostFocus += (_, _) => UpdateTypography();
         C<TextBox>("FontFamilyBox").KeyDown += (_, e) => { if (e.Key == Key.Enter) UpdateTypography(); };
@@ -163,6 +165,7 @@ public partial class MainWindow : Window
         {
             FontFamily = C<TextBox>("FontFamilyBox").Text ?? "Georgia", FontSize = C<Slider>("FontSizeSlider").Value,
             LineHeight = C<Slider>("LineHeightSlider").Value, ParagraphGap = C<Slider>("ParagraphGapSlider").Value,
+            WidthMode = (ReadingWidthMode)Math.Max(0, C<ComboBox>("WidthModeBox").SelectedIndex),
             WidthCharacters = (int)C<Slider>("ReadingWidthSlider").Value, Justified = C<ComboBox>("AlignmentBox").SelectedIndex == 1,
             FirstLineIndent = C<Slider>("IndentSlider").Value
         };
@@ -179,7 +182,9 @@ public partial class MainWindow : Window
         C<TextBlock>("FontSizeLabel").Text = $"Font size · {_vm.Reading.FontSize:0} DIP";
         C<TextBlock>("LineHeightLabel").Text = $"Line height · {_vm.Reading.LineHeight:0.00}";
         C<TextBlock>("ParagraphGapLabel").Text = $"Paragraph gap · {_vm.Reading.ParagraphGap:0.0} em";
-        C<TextBlock>("ReadingWidthLabel").Text = $"Reading width · {_vm.Reading.WidthCharacters} characters";
+        C<TextBlock>("ReadingWidthLabel").Text = $"Custom width · {_vm.Reading.WidthCharacters} characters";
+        C<Slider>("ReadingWidthSlider").IsVisible = _vm.Reading.WidthMode == ReadingWidthMode.Custom;
+        C<TextBlock>("ReadingWidthLabel").IsVisible = _vm.Reading.WidthMode == ReadingWidthMode.Custom;
         C<TextBlock>("IndentLabel").Text = $"First-line indent · {_vm.Reading.FirstLineIndent:0.0} em";
     }
     private void SaveReadingPreferences()
@@ -208,6 +213,7 @@ public partial class MainWindow : Window
         C<Slider>("LineHeightSlider").Value = _vm.Reading.LineHeight;
         C<Slider>("ParagraphGapSlider").Value = _vm.Reading.ParagraphGap;
         C<Slider>("ReadingWidthSlider").Value = _vm.Reading.WidthCharacters;
+        C<ComboBox>("WidthModeBox").SelectedIndex = (int)_vm.Reading.WidthMode;
         C<ComboBox>("AlignmentBox").SelectedIndex = _vm.Reading.Justified ? 1 : 0;
         C<Slider>("IndentSlider").Value = _vm.Reading.FirstLineIndent;
         _settingTypography = false;
@@ -437,13 +443,22 @@ public partial class MainWindow : Window
     {
         C<Grid>("DocumentGrid").IsVisible = _hasDocument; C<ScrollViewer>("EmptyPanel").IsVisible = !_hasDocument;
         UpdateCompactIcons();
-        var showOutline = _outlineVisible && !_focusMode && Session.Mode == DocumentMode.Read && Bounds.Width >= 850;
+        var narrow = Bounds.Width < 1000;
+        var showOutline = !_focusMode && Session.Mode == DocumentMode.Read && (narrow ? _outlineDrawer : _outlineVisible && Bounds.Width >= (_typeVisible ? 1320 : 1000));
         var showType = _typeVisible && !_focusMode;
         var signature = $"{_hasDocument}:{showOutline}:{showType}:{Session.Mode}:{Bounds.Width >= 1000}:{_focusMode}";
         if (_layoutSignature == signature) return;
         _layoutSignature = signature;
-        C<Grid>("DocumentGrid").ColumnDefinitions = new ColumnDefinitions($"{(showOutline ? "208" : "0")},*,{(showType ? "272" : "0")}");
+        C<Grid>("DocumentGrid").ColumnDefinitions = new ColumnDefinitions($"{(showOutline && !narrow ? "208" : "0")},*,{(showType && !narrow ? "272" : "0")}");
         C<Border>("OutlinePanel").IsVisible = showOutline; C<Border>("TypePanel").IsVisible = showType;
+        foreach (var name in new[] { "OutlinePanel", "TypePanel" })
+        {
+            var panel = C<Border>(name);
+            Grid.SetColumn(panel, narrow ? 1 : name == "OutlinePanel" ? 0 : 2);
+            panel.Width = narrow ? name == "OutlinePanel" ? 240 : 288 : double.NaN;
+            panel.HorizontalAlignment = narrow ? name == "OutlinePanel" ? Avalonia.Layout.HorizontalAlignment.Left : Avalonia.Layout.HorizontalAlignment.Right : Avalonia.Layout.HorizontalAlignment.Stretch;
+            panel.ZIndex = 2;
+        }
         UpdateCompactIcons();
         C<Button>("OutlineButton").IsVisible = !_focusMode; C<Button>("TypeButton").IsVisible = !_focusMode; C<Button>("FindButton").IsVisible = !_focusMode;
         var split = Session.Mode == DocumentMode.Split && Bounds.Width >= 1000 && !showType;
@@ -497,7 +512,7 @@ public partial class MainWindow : Window
         else if (command && e.Key == Key.E) { SetMode(e.KeyModifiers.HasFlag(KeyModifiers.Shift) ? DocumentMode.Split : Session.Mode == DocumentMode.Read ? DocumentMode.Edit : DocumentMode.Read); e.Handled = true; }
         else if (e.Key == Key.F3) { Find(e.KeyModifiers.HasFlag(KeyModifiers.Shift)); e.Handled = true; }
         else if (e.Key == Key.F11) { _focusMode = !_focusMode; UpdateLayoutMode(); e.Handled = true; }
-        else if (e.Key == Key.Escape) { C<Border>("FindBar").IsVisible = false; _typeVisible = false; _focusMode = false; UpdateLayoutMode(); }
+        else if (e.Key == Key.Escape) { C<Border>("FindBar").IsVisible = false; _typeVisible = false; _outlineDrawer = false; _focusMode = false; UpdateLayoutMode(); }
     }
     private void ConfigureIcons()
     {
@@ -522,7 +537,7 @@ public partial class MainWindow : Window
     }
     private void UpdateCompactIcons()
     {
-        var compact = Bounds.Width < 1500;
+        var compact = true;
         foreach (var (name, kind, label) in new[] {
             ("OutlineButton", "outline", "Outline"), ("TypeButton", "typography", "Typography"),
             ("FindButton", "find", "Find"), ("AppearanceButton", "appearance", "Appearance") })
