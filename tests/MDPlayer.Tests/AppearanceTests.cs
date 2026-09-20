@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 using Avalonia.Input;
+using Avalonia.Threading;
 using MDPlayer.Core;
 using MDPlayer.Desktop;
 using MDPlayer.Desktop.Services;
@@ -17,6 +18,7 @@ public sealed class MemoryPreferences : IUserPreferencesStore
 {
     public UserPreferences Current { get; private set; } = new();
     public void Save(UserPreferences preferences) => Current = preferences;
+    public string? TakeLoadNotice() => null;
 }
 public sealed class TestApplication : App
 {
@@ -103,5 +105,34 @@ public sealed class AppearanceTests
         Assert.Null(window.Session.FilePath);
         Assert.True(window.FindControl<ScrollViewer>("EmptyPanel")!.IsVisible);
         window.Close();
+    }
+
+    [AvaloniaFact]
+    public async Task ReadingAppearanceAutoSavesAndLoadsInTheNextWindow()
+    {
+        var app = (App)Application.Current!;
+        var preferences = app.Services.GetRequiredService<IUserPreferencesStore>();
+        var original = preferences.Current;
+        try
+        {
+            var first = app.CreateWindow();
+            first.Show();
+            first.FindControl<Slider>("FontSizeSlider")!.Value = 23;
+            first.FindControl<Slider>("ParagraphGapSlider")!.Value = 1.4;
+            await Task.Delay(650);
+            Dispatcher.UIThread.RunJobs();
+
+            Assert.Equal(23, preferences.Current.Reading.FontSize);
+            Assert.Equal(1.4, preferences.Current.Reading.ParagraphGap, 5);
+            Assert.Equal("Saved automatically", first.FindControl<TextBlock>("TypographySaveStatus")!.Text);
+            first.Close();
+
+            var second = app.CreateWindow();
+            second.Show();
+            Assert.Equal(23, second.FindControl<Slider>("FontSizeSlider")!.Value);
+            Assert.Equal(1.4, second.FindControl<Slider>("ParagraphGapSlider")!.Value, 5);
+            second.Close();
+        }
+        finally { preferences.Save(original); }
     }
 }

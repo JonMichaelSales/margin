@@ -14,8 +14,8 @@ This revision incorporates the accepted SkinManager and installer plan. Implemen
 - Read, Edit, and Split are explicit modes with a persistent unsaved indicator. A narrow Split workspace provides Read/Edit mode controls when two useful columns cannot fit.
 - The Paper shell is canonical: quiet toolbar, centered reading measure, optional outline, optional typography inspector, restrained status footer.
 - No automatic document saves, recovery copies, recent-file list, session restoration, or document-content persistence in v1.
-- Settings contain appearance, future-document reading defaults, editor typography, and window geometry. They are stored in Margin's application settings directory, outside document folders and Mac app bundles.
-- Reading adjustments are window-specific. “Use as default” explicitly changes future-document preferences.
+- Settings contain appearance, reading defaults, editor typography, and window geometry. They are stored in Margin's application settings directory, outside document folders and Mac app bundles. Existing settings migrate once from the legacy MDPlayer directory while leaving the original file intact.
+- Reading adjustments apply immediately and save automatically after a short debounce. The typography panel reports saving, saved, and failed states and provides an explicit reset. These settings affect future windows without modifying any Markdown document.
 - Personal testing is the first distribution scope. Manual updates, unsigned Windows installers, and ad-hoc Mac signing are sufficient for that scope. Public stores, certificate purchases, notarization, and automatic updates are deferred.
 
 ## 2. Visual language and layout
@@ -60,7 +60,7 @@ The accent resource retains its package name for periwinkle and violet palettes.
 
 Literal application colors are allowed only in skin definitions and test fixtures. `scripts/Test-Colors.ps1` audits application C#/AXAML. This source audit supplements actual rendered contrast/state tests; it does not prove all inherited platform-template colors are correct.
 
-The custom Appearance dialog has Follow system, an Margin group, an Included skins group, named preview tiles, a current-selection indicator, keyboard navigation, and Preview/Apply/Cancel behavior. Follow system maps to Paper Light/Dark. Cancel, Escape, and window close restore the original appearance. Apply persists only after successful application. A missing saved skin falls back to Follow system.
+The custom Appearance dialog has Follow system, a Margin group, an Included skins group, named preview tiles, a current-selection indicator, keyboard navigation, and Preview/Apply/Cancel behavior. Follow system maps to Paper Light/Dark. Cancel, Escape, and window close restore the original appearance. “Apply and save” persists only after successful application. A missing saved skin falls back to Follow system.
 
 ## 4. Screen contracts
 
@@ -68,7 +68,7 @@ The custom Appearance dialog has Follow system, an Margin group, an Included ski
 |---|---|
 | Empty | Open button, drag/drop target, no invented recent files or restored content |
 | Read, clean | Rendered source, optional outline/Find/type controls, explicit Edit action |
-| Typography | Font family, 12–32 DIP size, 1.2–2.2 line height, 0–1.8 em paragraph gap, 48–100 character measure, natural/justified alignment, optional first-line indentation |
+| Typography | Font family, 12–32 DIP size, 1.2–2.2 line height, 0–1.8 em paragraph gap, 48–100 character measure, natural/justified alignment, optional first-line indentation, automatic preference persistence, and reset |
 | Edit | Lazy-created AvaloniaEdit, source formatting, undo/redo, separate editor preferences |
 | Split | Source and native preview, source-span synchronization, debounced preview parsing |
 | Read, dirty | Current unsaved buffer rendered; Save and unsaved indicator remain visible |

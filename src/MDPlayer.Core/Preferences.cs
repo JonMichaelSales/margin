@@ -28,7 +28,8 @@ public sealed record ThemePreference(bool FollowSystem = true, string SkinName =
 public sealed record WindowGeometry(double Width = 1280, double Height = 860, double? X = null, double? Y = null, bool Maximized = false);
 public sealed record UserPreferences
 {
-    public int SchemaVersion { get; init; } = 1;
+    public const int CurrentSchemaVersion = 2;
+    public int SchemaVersion { get; init; } = CurrentSchemaVersion;
     public ThemePreference Theme { get; init; } = new();
     public ReadingPreferences Reading { get; init; } = new();
     public WindowGeometry Window { get; init; } = new();
@@ -39,4 +40,5 @@ public interface IUserPreferencesStore
 {
     UserPreferences Current { get; }
     void Save(UserPreferences preferences);
+    string? TakeLoadNotice();
 }

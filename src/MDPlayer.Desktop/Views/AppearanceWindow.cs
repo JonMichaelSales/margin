@@ -28,7 +28,7 @@ public sealed class AppearanceWindow : Window
         var footer = new DockPanel { Margin = new Thickness(0, 16, 0, 0) };
         var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         var cancel = new Button { Content = "Cancel" }; cancel.Click += (_, _) => Close();
-        var apply = new Button { Content = "Apply" }; apply.Classes.Add("accent");
+        var apply = new Button { Content = "Apply and save" }; apply.Classes.Add("accent");
         apply.Click += (_, _) => { try { appearance.Commit(); _committed = true; Close(); } catch (Exception ex) { _status.Text = ex.Message; } };
         actions.Children.Add(cancel); actions.Children.Add(apply); DockPanel.SetDock(actions, Dock.Right); footer.Children.Add(actions); footer.Children.Add(_status); DockPanel.SetDock(footer, Dock.Bottom); root.Children.Add(footer);
         var groups = new StackPanel { Spacing = 18 };

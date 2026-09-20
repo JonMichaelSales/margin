@@ -38,7 +38,9 @@ public partial class MainWindow : Window
     private CancellationTokenSource? _parseCancellation, _loadCancellation;
     private FileSystemWatcher? _watcher;
     private readonly DispatcherTimer _watchDebounce = new() { Interval = TimeSpan.FromMilliseconds(400) };
+    private readonly DispatcherTimer _typographySaveDebounce = new() { Interval = TimeSpan.FromMilliseconds(400) };
     private bool _hasDocument, _changingEditor, _closingApproved, _closePending, _isSaving, _settingTypography, _syncing;
+    private bool _readingNeedsSave;
     private string? _layoutSignature; private bool _outlineVisible = true, _typeVisible, _focusMode;
     private string? _initialPath;
     private long _openGeneration;
@@ -77,6 +79,7 @@ public partial class MainWindow : Window
         Session.PropertyChanged += SessionChanged;
         _appearance.Changed += AppearanceChanged;
         _watchDebounce.Tick += async (_, _) => { _watchDebounce.Stop(); await CheckDiskAsync(); };
+        _typographySaveDebounce.Tick += (_, _) => { _typographySaveDebounce.Stop(); SaveReadingPreferences(); };
         DragDrop.SetAllowDrop(this, true);
         AddHandler(DragDrop.DragOverEvent, (_, e) => { e.DragEffects = e.DataTransfer.Formats.Contains(DataFormat.File) ? DragDropEffects.Copy : DragDropEffects.None; e.Handled = true; });
         AddHandler(DragDrop.DropEvent, async (_, e) =>
@@ -90,13 +93,22 @@ public partial class MainWindow : Window
             {
                 Width = Math.Min(Width, area.Width / RenderScaling); Height = Math.Min(Height, area.Height / RenderScaling);
                 Position = new PixelPoint(Math.Max(area.X, Math.Min(Position.X, area.Right - (int)(Width * RenderScaling))), Math.Max(area.Y, Math.Min(Position.Y, area.Bottom - (int)(Height * RenderScaling))));
-            } if (_initialPath is { } path) { _initialPath = null; await OpenDocumentAsync(path); } };
+            }
+            if (_initialPath is { } path) { _initialPath = null; await OpenDocumentAsync(path); }
+            if (_preferences.TakeLoadNotice() is { } notice) ShowMessage(notice);
+        };
         Closing += OnClosing;
         Closed += (_, _) =>
         {
-            _parseCancellation?.Cancel(); _loadCancellation?.Cancel(); _watcher?.Dispose(); _watchDebounce.Stop();
+            _parseCancellation?.Cancel(); _loadCancellation?.Cancel(); _watcher?.Dispose(); _watchDebounce.Stop(); _typographySaveDebounce.Stop();
             _appearance.Changed -= AppearanceChanged; Session.PropertyChanged -= SessionChanged;
-            try { _preferences.Save(_preferences.Current with { Window = new(Width, Height, Position.X, Position.Y, WindowState == WindowState.Maximized) }); } catch { /* Closing must not discard an already completed file save because preference storage is unavailable. */ }
+            try
+            {
+                var current = _readingNeedsSave ? _preferences.Current with { Reading = _vm.Reading } : _preferences.Current;
+                _preferences.Save(current with { Window = new(Width, Height, Position.X, Position.Y, WindowState == WindowState.Maximized) });
+                _readingNeedsSave = false;
+            }
+            catch { /* Closing must not discard an already completed file save because preference storage is unavailable. */ }
         };
         SizeChanged += (_, _) => UpdateLayoutMode();
         KeyDown += OnWindowKeyDown; RefreshChrome();
@@ -140,8 +152,8 @@ public partial class MainWindow : Window
         C<ComboBox>("AlignmentBox").SelectionChanged += (_, _) => UpdateTypography();
         C<TextBox>("FontFamilyBox").LostFocus += (_, _) => UpdateTypography();
         C<TextBox>("FontFamilyBox").KeyDown += (_, e) => { if (e.Key == Key.Enter) UpdateTypography(); };
-        C<Button>("UseDefaultsButton").Click += (_, _) => { try { _preferences.Save(_preferences.Current with { Reading = _vm.Reading }); ShowMessage("Reading defaults saved. The Markdown file is unchanged."); } catch (Exception ex) { ShowError(ex); } };
-        _settingTypography = false; UpdateTypography();
+        C<Button>("ResetReadingButton").Click += (_, _) => ResetReadingPreferences();
+        _settingTypography = false; RefreshTypographyLabels();
     }
     private void UpdateTypography()
     {
@@ -155,12 +167,54 @@ public partial class MainWindow : Window
             FirstLineIndent = C<Slider>("IndentSlider").Value
         };
         _reader.Preferences = _vm.Reading;
+        _readingNeedsSave = true;
+        _typographySaveDebounce.Stop();
+        _typographySaveDebounce.Start();
+        C<TextBlock>("TypographySaveStatus").Text = "Saving…";
+        C<TextBlock>("TypographySaveStatus")[!TextBlock.ForegroundProperty] = new DynamicResourceExtension("TextSecondaryBrush");
+        RefreshTypographyLabels();
+    }
+    private void RefreshTypographyLabels()
+    {
         C<TextBlock>("FontSizeLabel").Text = $"Font size · {_vm.Reading.FontSize:0} DIP";
         C<TextBlock>("LineHeightLabel").Text = $"Line height · {_vm.Reading.LineHeight:0.00}";
         C<TextBlock>("ParagraphGapLabel").Text = $"Paragraph gap · {_vm.Reading.ParagraphGap:0.0} em";
         C<TextBlock>("ReadingWidthLabel").Text = $"Reading width · {_vm.Reading.WidthCharacters} characters";
         C<TextBlock>("IndentLabel").Text = $"First-line indent · {_vm.Reading.FirstLineIndent:0.0} em";
-
+    }
+    private void SaveReadingPreferences()
+    {
+        if (!_readingNeedsSave) return;
+        try
+        {
+            _preferences.Save(_preferences.Current with { Reading = _vm.Reading });
+            _readingNeedsSave = false;
+            C<TextBlock>("TypographySaveStatus").Text = "Saved automatically";
+            C<TextBlock>("TypographySaveStatus")[!TextBlock.ForegroundProperty] = new DynamicResourceExtension("SuccessBrush");
+        }
+        catch (Exception ex)
+        {
+            C<TextBlock>("TypographySaveStatus").Text = "Could not save";
+            C<TextBlock>("TypographySaveStatus")[!TextBlock.ForegroundProperty] = new DynamicResourceExtension("ErrorBrush");
+            ShowError(ex);
+        }
+    }
+    private void ResetReadingPreferences()
+    {
+        _settingTypography = true;
+        _vm.Reading = new ReadingPreferences();
+        C<TextBox>("FontFamilyBox").Text = _vm.Reading.FontFamily;
+        C<Slider>("FontSizeSlider").Value = _vm.Reading.FontSize;
+        C<Slider>("LineHeightSlider").Value = _vm.Reading.LineHeight;
+        C<Slider>("ParagraphGapSlider").Value = _vm.Reading.ParagraphGap;
+        C<Slider>("ReadingWidthSlider").Value = _vm.Reading.WidthCharacters;
+        C<ComboBox>("AlignmentBox").SelectedIndex = _vm.Reading.Justified ? 1 : 0;
+        C<Slider>("IndentSlider").Value = _vm.Reading.FirstLineIndent;
+        _settingTypography = false;
+        _reader.Preferences = _vm.Reading;
+        _readingNeedsSave = true;
+        RefreshTypographyLabels();
+        SaveReadingPreferences();
     }
     public async Task OpenDocumentAsync(string path)
     {

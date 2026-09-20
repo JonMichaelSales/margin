@@ -36,7 +36,8 @@
       </Grid>
       <Border Name="TypePanel" Grid.Column="2" Background="{DynamicResource BackgroundLightBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0" Padding="20" IsVisible="False">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"><StackPanel Spacing="8">
-          <TextBlock Text="Make it yours" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Reading appearance only" Classes="secondary" FontSize="12" Margin="0,0,0,12" />
+          <TextBlock Text="Make it yours" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Reading settings save automatically" Classes="secondary" FontSize="12" />
+          <TextBlock Name="TypographySaveStatus" Text="Saved" Classes="secondary" FontSize="11" Margin="0,0,0,12" />
           <TextBlock Text="Typeface" /><TextBox Name="FontFamilyBox" Text="Georgia" Watermark="Installed font name" />
           <TextBlock Name="FontSizeLabel" Text="Font size · 18" /><Slider Name="FontSizeSlider" Minimum="12" Maximum="32" TickFrequency="1" IsSnapToTickEnabled="True" Value="18" />
           <TextBlock Name="LineHeightLabel" Text="Line height · 1.65" /><Slider Name="LineHeightSlider" Minimum="1.2" Maximum="2.2" TickFrequency="0.05" IsSnapToTickEnabled="True" Value="1.65" />
@@ -44,7 +45,7 @@
           <TextBlock Name="ReadingWidthLabel" Text="Reading width · 68 characters" /><Slider Name="ReadingWidthSlider" Minimum="48" Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Value="68" />
           <TextBlock Text="Alignment" /><ComboBox Name="AlignmentBox" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Natural" /><ComboBoxItem Content="Justified" /></ComboBox>
           <TextBlock Name="IndentLabel" Text="First-line indent · 0 em" /><Slider Name="IndentSlider" Minimum="0" Maximum="2" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="0" />
-          <Button Name="UseDefaultsButton" Content="Use as default" Margin="0,16,0,0" /><Button Name="CloseTypeButton" Content="Close typography" />
+          <Button Name="ResetReadingButton" Content="Reset reading settings" Margin="0,16,0,0" /><Button Name="CloseTypeButton" Content="Close typography" />
         </StackPanel></ScrollViewer>
       </Border>
     </Grid>
