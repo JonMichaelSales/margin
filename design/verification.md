@@ -1,10 +1,10 @@
 # Margin verification record
 
-Recorded through 19 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
+Recorded through 29 September 2026. This record distinguishes implemented source, automated tests, native execution, and installed packages. Earlier browser/prototype checks do not count as native application evidence.
 
 ## Current build checks
 
-`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **54 passed tests**, and a successful fixed-color audit. Persistence coverage verifies restart-level settings round trips, one-time migration from the legacy MDPlayer directory without deleting the original, preservation and reporting of unreadable settings, last-valid-backup recovery, independent theme/reading/window writes, and debounced typography autosave followed by a new-window reload. Existing skin-name migration cases still verify that saved MDPlayer selections become their corresponding Margin selections without changing reading/window preferences. The Windows default-app test verifies that Margin's in-app action targets its per-user `registeredAppUser` settings page and that the command is visible only on Windows.
+`scripts/Build.ps1 -Configuration Release` completed with a locked restore, zero build warnings/errors, **55 passed tests**, and a successful fixed-color audit. Persistence coverage verifies restart-level settings round trips, one-time migration from the legacy MDPlayer directory without deleting the original, preservation and reporting of unreadable settings, last-valid-backup recovery, independent theme/reading/window writes, and debounced typography autosave followed by a new-window reload. Existing skin-name migration cases still verify that saved MDPlayer selections become their corresponding Margin selections without changing reading/window preferences. The Windows default-app test verifies that Margin's in-app action targets its per-user `registeredAppUser` settings page and that the command is visible only on Windows.
 
 Test output: `tests/MDPlayer.Tests/TestResults/MDPlayer.trx` (generated locally, excluded from Git). Tests exercise the real Avalonia/Skia compositor in a headless platform, including scrolling and font changes that previously exposed a render invalidation crash. That crash was fixed by deferring measure invalidation out of the render callback.
 
@@ -19,6 +19,10 @@ Palette contrast tests cover primary/secondary/link colors of the six Margin ski
 Implemented Comfortable, Wide, Full workspace, and Custom (45–160 characters) modes with saved selection. Native block layout allows tables, code, and images to expand while prose keeps its chosen measure. The shell now groups modes, compacts secondary commands, and uses a distinct document surface; narrow windows use edge drawers. All six Margin palettes and heading/list/quote/code/table styling were refined using named skin resources.
 
 Release compilation and the fixed-color audit passed. All 54 tests passed, including selection and document preservation at 720, 1280, 1920, and 3440 DIP and saved width-mode reload. Headless Skia screenshots are in artifacts/qualification/reading-layout; light/dark and narrow layouts were visually reviewed. These are compositor checks, not Mac or native accessibility qualification.
+
+## Editor repair 0.1.8
+
+Registered the required AvaloniaEdit Fluent theme. Before the fix, the editor had no template and its text area and text view measured 0 × 0 despite an allocated editor host. The regression test requires realized visual lines and sends keyboard text input and undo in Edit and Split for all 18 skins, checking dirty state, SkinManager foreground, and unchanged source-file bytes. Locked Release build, color audit, and all 55 tests passed.
 
 ## Native Windows evidence
 
